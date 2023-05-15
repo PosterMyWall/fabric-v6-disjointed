@@ -473,7 +473,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5";
+var version = "6.0.0-beta5.1";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -7516,6 +7516,53 @@ let FabricObject$1 = class FabricObject extends AnimatableObject {
   }
 
   /**
+   * *PMW*
+   * This function returns corner points of the object relative to the given center.
+   * @param {Object} center center of object
+   * @returns {{tl: ({x: number, y: number}|*), tr: ({x: number, y: number}|*), bl: ({x: number, y: number}|*), br: ({x: number, y: *}|*)}}
+   */
+  getCornerPoints(center) {
+    const angle = this.angle,
+      height = this.getScaledHeight(),
+      // coordinates of the center point
+      x = center.x,
+      y = center.y,
+      theta = degreesToRadians(angle);
+    let width = this.getScaledWidth();
+    if (width < 0) {
+      width = Math.abs(width);
+    }
+    const sinTh = Math.sin(theta),
+      cosTh = Math.cos(theta),
+      _angle = width > 0 ? Math.atan(height / width) : 0,
+      _hypotenuse = width / Math.cos(_angle) / 2,
+      offsetX = Math.cos(_angle + theta) * _hypotenuse,
+      offsetY = Math.sin(_angle + theta) * _hypotenuse;
+    const tl = {
+        x: x - offsetX,
+        y: y - offsetY
+      },
+      tr = {
+        x: x - offsetX + width * cosTh,
+        y: y - offsetY + width * sinTh
+      },
+      br = {
+        x: x + offsetX,
+        y: y + offsetY
+      },
+      bl = {
+        x: x - offsetX - height * sinTh,
+        y: y - offsetY + height * cosTh
+      };
+    return {
+      tl: tl,
+      tr: tr,
+      bl: bl,
+      br: br
+    };
+  }
+
+  /**
    * Returns a string representation of an instance
    * @return {String}
    */
@@ -8549,6 +8596,13 @@ class Control {
    */
 
   /**
+   * *PMW* added to use in cursor styling
+   * Whether the control is disabled or not
+   * @type {Boolean}
+   * @default false
+   */
+
+  /**
    * Name of the action that the control will likely execute.
    * This is optional. FabricJS uses to identify what the user is doing for some
    * extra optimizations. If you are writing a custom control and you want to know
@@ -8648,6 +8702,7 @@ class Control {
 
   constructor(options) {
     _defineProperty(this, "visible", true);
+    _defineProperty(this, "disabled", false);
     _defineProperty(this, "actionName", 'scale');
     _defineProperty(this, "angle", 0);
     _defineProperty(this, "x", 0);
@@ -24111,7 +24166,7 @@ const rotatePoint = (point, origin, radians) => point.rotate(radians, origin);
  * @param {FabricObject[]} elements FabricObject(s) parsed from svg, to group
  * @return {FabricObject | Group}
  */
-const groupSVGElements = elements => {
+const groupSVGElements = (elements, options) => {
   if (elements && elements.length === 1) {
     return elements[0];
   }

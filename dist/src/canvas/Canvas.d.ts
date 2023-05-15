@@ -212,10 +212,7 @@ export declare class Canvas extends SelectableCanvas {
     _basicEventHandler<T extends keyof (CanvasEvents | ObjectEvents)>(eventType: T, options: (CanvasEvents & ObjectEvents)[T]): (import("../EventTypeDefs").CollectionEvents & {
         'canvas:cleared': never;
         'before:render': {
-            ctx: CanvasRenderingContext2D; /**
-             * @private
-             * @param {Event} [e] Event object fired on wheel event
-             */
+            ctx: CanvasRenderingContext2D;
         };
         'after:render': {
             ctx: CanvasRenderingContext2D;
@@ -389,6 +386,13 @@ export declare class Canvas extends SelectableCanvas {
         'erasing:end': {
             path: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
         };
+        'pmwMl:moved': {};
+        'pmwMr:moved': {};
+        'pmwMt:moved': {};
+        'pmwMb:moved': {};
+        'pmwPreviousSlideBtn:clicked': {};
+        'pmwNextSlideBtn:clicked': {};
+        'pmwBmBtn:clicked': {};
     })[T];
     /**
      * @private

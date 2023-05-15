@@ -3,7 +3,8 @@ import { config } from '../../config';
 import { ALIASING_LIMIT, iMatrix, VERSION } from '../../constants';
 import { ObjectEvents } from '../../EventTypeDefs';
 import { AnimatableObject } from './AnimatableObject';
-import {CornerPoints, Point } from '../../Point';
+import {Point } from '../../Point';
+import type {CornerPoints } from '../../Point';
 import { Shadow } from '../../Shadow';
 import type {
   TDegree,
@@ -40,7 +41,7 @@ import type { Canvas } from '../../canvas/Canvas';
 import { SerializedObjectProps } from './types/SerializedObjectProps';
 import { ObjectProps } from './types/ObjectProps';
 import { TProps } from './types';
-import { degreesToRadians } from '../../util';
+import { degreesToRadians } from '../../util/misc/radiansDegreesConversion';
 
 export type TCachedFabricObject = FabricObject &
   Required<

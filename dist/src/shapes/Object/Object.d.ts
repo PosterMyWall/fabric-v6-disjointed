@@ -1,6 +1,7 @@
 import { ObjectEvents } from '../../EventTypeDefs';
 import { AnimatableObject } from './AnimatableObject';
 import { Point } from '../../Point';
+import type { CornerPoints } from '../../Point';
 import { Shadow } from '../../Shadow';
 import type { TDegree, TFiller, TSize, TCacheCanvasDimensions } from '../../typedefs';
 import type { Group } from '../Group';
@@ -266,6 +267,13 @@ export declare class FabricObject<Props extends TProps<ObjectProps> = Partial<Ob
      * @param {Object} object
      */
     _removeDefaultValues<T extends object>(object: T): Partial<T>;
+    /**
+     * *PMW*
+     * This function returns corner points of the object relative to the given center.
+     * @param {Object} center center of object
+     * @returns {{tl: ({x: number, y: number}|*), tr: ({x: number, y: number}|*), bl: ({x: number, y: number}|*), br: ({x: number, y: *}|*)}}
+     */
+    getCornerPoints(center: Point): CornerPoints;
     /**
      * Returns a string representation of an instance
      * @return {String}

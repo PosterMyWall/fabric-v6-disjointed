@@ -183,6 +183,13 @@ export type ObjectEvents = ObjectPointerEvents & DnDEvents & MiscEvents & Object
     'erasing:end': {
         path: FabricObject;
     };
+    'pmwMl:moved': {};
+    'pmwMr:moved': {};
+    'pmwMt:moved': {};
+    'pmwMb:moved': {};
+    'pmwPreviousSlideBtn:clicked': {};
+    'pmwNextSlideBtn:clicked': {};
+    'pmwBmBtn:clicked': {};
 };
 export type StaticCanvasEvents = CollectionEvents & {
     'canvas:cleared': never;
