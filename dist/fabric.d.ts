@@ -34,6 +34,8 @@ export { Group } from './src/shapes/Group';
 export { ActiveSelection } from './src/shapes/ActiveSelection';
 export { Image } from './src/shapes/Image';
 export { createCollectionMixin } from './src/Collection';
+export type { TPointerEvent, Transform } from './src/EventTypeDefs';
+export type { GradientOptions, GradientType } from './src/gradient/typedefs';
 export * as util from './src/util';
 export * from './src/parser';
 export { Control } from './src/controls/Control';

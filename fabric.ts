@@ -41,6 +41,11 @@ export { ActiveSelection } from './src/shapes/ActiveSelection';
 export { Image } from './src/shapes/Image';
 export { createCollectionMixin } from './src/Collection';
 
+export type {TPointerEvent, Transform} from './src/EventTypeDefs'
+export type {GradientOptions, GradientType} from './src/gradient/typedefs';
+import type {TSvgParsedCallback} from './src/parser/typedefs';
+import type {TFiller} from './src/typedefs';
+
 export * as util from './src/util';
 
 export * from './src/parser';
