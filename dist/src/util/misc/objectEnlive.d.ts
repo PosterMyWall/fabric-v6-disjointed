@@ -42,7 +42,7 @@ export type EnlivenObjectOptions = {
  * @param {AbortSignal} [options.signal] handle aborting, see https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal
  * @returns {Promise<FabricObject[]>}
  */
-export declare const enlivenObjects: (objects: any[], { signal, reviver }?: EnlivenObjectOptions) => Promise<FabricObject<Partial<import("../../shapes/Object/types").FabricObjectProps>, import("../../shapes/Object/types").SerializedObjectProps, import("../../EventTypeDefs").ObjectEvents>[]>;
+export declare const enlivenObjects: (objects: any[], { signal, reviver }?: EnlivenObjectOptions) => Promise<FabricObject<Partial<import("../../..").FabricObjectProps>, import("../../shapes/Object/types").SerializedObjectProps, import("../../EventTypeDefs").ObjectEvents>[]>;
 /**
  * Creates corresponding fabric instances residing in an object, e.g. `clipPath`
  * @param {Object} object with properties to enlive ( fill, stroke, clipPath, path )
@@ -50,7 +50,7 @@ export declare const enlivenObjects: (objects: any[], { signal, reviver }?: Enli
  * @param {AbortSignal} [options.signal] handle aborting, see https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal
  * @returns {Promise<Record<string, FabricObject | TFiller | null>>} the input object with enlived values
  */
-export declare const enlivenObjectEnlivables: <R = Record<string, FabricObject<Partial<import("../../shapes/Object/types").FabricObjectProps>, import("../../shapes/Object/types").SerializedObjectProps, import("../../EventTypeDefs").ObjectEvents> | TFiller | null>>(serializedObject: any, { signal }?: {
+export declare const enlivenObjectEnlivables: <R = Record<string, FabricObject<Partial<import("../../..").FabricObjectProps>, import("../../shapes/Object/types").SerializedObjectProps, import("../../EventTypeDefs").ObjectEvents> | TFiller | null>>(serializedObject: any, { signal }?: {
     signal?: AbortSignal | undefined;
 }) => Promise<R>;
 //# sourceMappingURL=objectEnlive.d.ts.map

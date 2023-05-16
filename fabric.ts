@@ -48,6 +48,7 @@ export type {TFiller} from './src/typedefs';
 export type {TPointerEventInfo} from './src/EventTypeDefs';
 export type {CornerPoints} from './src/Point';
 export type {TMat2D} from './src/typedefs';
+export type {FabricObjectProps} from './src/shapes/Object/types/FabricObjectProps';
 
 export * as util from './src/util';
 

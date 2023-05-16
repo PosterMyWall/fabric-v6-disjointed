@@ -112,8 +112,8 @@ export declare class Canvas extends SelectableCanvas {
      * Override at will
      */
     protected findDragTargets(e: DragEvent): {
-        target: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-        targets: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+        target: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        targets: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
     };
     /**
      * prevent default to allow drop event to be fired
@@ -218,54 +218,54 @@ export declare class Canvas extends SelectableCanvas {
             ctx: CanvasRenderingContext2D;
         };
     } & Record<"mouse:down" | "mouse:down:before" | "mouse:move" | "mouse:move:before" | "mouse:up" | "mouse:up:before" | "mouse:dblclick", TPointerEventInfo<TPointerEvent>> & Record<"mouse:wheel", TPointerEventInfo<WheelEvent>> & Record<"mouse:over", import("../EventTypeDefs").TEvent<TPointerEvent> & {
-        target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-        subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
         button?: number | undefined;
         isClick: boolean;
         pointer: Point;
         transform?: Transform | null | undefined;
         absolutePointer: Point;
-        currentSubTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-        currentTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
+        currentSubTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        currentTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
     } & {
-        previousTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        previousTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
     }> & Record<"mouse:out", import("../EventTypeDefs").TEvent<TPointerEvent> & {
-        target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-        subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
         button?: number | undefined;
         isClick: boolean;
         pointer: Point;
         transform?: Transform | null | undefined;
         absolutePointer: Point;
-        currentSubTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-        currentTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
+        currentSubTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        currentTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
     } & {
-        nextTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        nextTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
     }> & {
         dragstart: import("../EventTypeDefs").TEvent<DragEvent> & {
-            target: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+            target: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
         };
         drag: DragEventData;
         dragover: DragEventData;
         dragenter: import("../EventTypeDefs").TEvent<DragEvent> & {
-            target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-            subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-            dragSource?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+            dragSource?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
             canDrop?: boolean | undefined;
             didDrop?: boolean | undefined;
-            dropTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            dropTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         } & {
-            previousTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            previousTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         };
         dragleave: import("../EventTypeDefs").TEvent<DragEvent> & {
-            target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-            subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-            dragSource?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+            dragSource?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
             canDrop?: boolean | undefined;
             didDrop?: boolean | undefined;
-            dropTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            dropTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         } & {
-            nextTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            nextTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         };
         dragend: DragEventData;
         'drop:before': import("../EventTypeDefs").DropEventData;
@@ -273,65 +273,65 @@ export declare class Canvas extends SelectableCanvas {
         'drop:after': import("../EventTypeDefs").DropEventData;
     } & {
         'drag:enter': import("../EventTypeDefs").TEvent<DragEvent> & {
-            target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-            subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-            dragSource?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+            dragSource?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
             canDrop?: boolean | undefined;
             didDrop?: boolean | undefined;
-            dropTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            dropTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         } & {
-            previousTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            previousTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         };
         'drag:leave': import("../EventTypeDefs").TEvent<DragEvent> & {
-            target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-            subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-            dragSource?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+            dragSource?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
             canDrop?: boolean | undefined;
             didDrop?: boolean | undefined;
-            dropTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            dropTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         } & {
-            nextTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+            nextTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
         };
     } & import("../EventTypeDefs").MiscEvents & Record<"object:moving" | "object:scaling" | "object:rotating" | "object:skewing" | "object:resizing", import("../EventTypeDefs").TEvent<TPointerEvent> & {
         transform: Transform;
         pointer: Point;
     } & {
-        target: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+        target: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
     }> & Record<"object:modified", import("../EventTypeDefs").ModifiedEvent<TPointerEvent> | {
-        target: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+        target: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
     }> & {
         'before:transform': import("../EventTypeDefs").TEvent<TPointerEvent> & {
             transform: Transform;
         };
     } & {
         'selection:created': Partial<import("../EventTypeDefs").TEvent<TPointerEvent>> & {
-            selected: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+            selected: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
         };
         'selection:updated': Partial<import("../EventTypeDefs").TEvent<TPointerEvent>> & {
-            selected: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
-            deselected: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+            selected: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+            deselected: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
         };
         'before:selection:cleared': Partial<import("../EventTypeDefs").TEvent<TPointerEvent>> & {
-            deselected: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+            deselected: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
         };
         'selection:cleared': Partial<import("../EventTypeDefs").TEvent<TPointerEvent>> & {
-            deselected: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+            deselected: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
         };
     } & {
         'before:path:created': {
-            path: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+            path: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
         };
         'path:created': {
-            path: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+            path: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
         };
         'erasing:start': never;
         'erasing:end': {
-            path: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
-            targets: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
-            subTargets: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+            path: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+            targets: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
+            subTargets: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[];
             drawables: {
-                backgroundImage?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-                overlayImage?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+                backgroundImage?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+                overlayImage?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
             };
         };
         'text:selection:changed': {
@@ -347,35 +347,35 @@ export declare class Canvas extends SelectableCanvas {
             target: IText<import("../shapes/IText/IText").ITextProps, import("../shapes/IText/IText").SerializedITextProps, import("../shapes/IText/ITextBehavior").ITextEvents>;
         };
     } & Record<"mousedown" | "mousedown:before" | "mousemove" | "mousemove:before" | "mouseup" | "mouseup:before" | "mousedblclick", TPointerEventInfo<TPointerEvent>> & Record<"mousewheel", TPointerEventInfo<WheelEvent>> & Record<"mouseover", import("../EventTypeDefs").TEvent<TPointerEvent> & {
-        target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-        subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
         button?: number | undefined;
         isClick: boolean;
         pointer: Point;
         transform?: Transform | null | undefined;
         absolutePointer: Point;
-        currentSubTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-        currentTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
+        currentSubTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        currentTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
     } & {
-        previousTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        previousTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
     }> & Record<"mouseout", import("../EventTypeDefs").TEvent<TPointerEvent> & {
-        target?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
-        subTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        target?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        subTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
         button?: number | undefined;
         isClick: boolean;
         pointer: Point;
         transform?: Transform | null | undefined;
         absolutePointer: Point;
-        currentSubTargets?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
-        currentTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
+        currentSubTargets?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>[] | undefined;
+        currentTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | null | undefined;
     } & {
-        nextTarget?: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
+        nextTarget?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
     }> & Record<"moving" | "scaling" | "rotating" | "skewing" | "resizing", import("../EventTypeDefs").BasicTransformEvent<TPointerEvent>> & Record<"modified", import("../EventTypeDefs").ModifiedEvent<TPointerEvent>> & {
         selected: Partial<import("../EventTypeDefs").TEvent<TPointerEvent>> & {
-            target: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+            target: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
         };
         deselected: Partial<import("../EventTypeDefs").TEvent<TPointerEvent>> & {
-            target: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+            target: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
         };
         added: {
             target: Canvas | Group | import("./StaticCanvas").StaticCanvas<import("../EventTypeDefs").StaticCanvasEvents>;
@@ -384,7 +384,7 @@ export declare class Canvas extends SelectableCanvas {
             target: Canvas | Group | import("./StaticCanvas").StaticCanvas<import("../EventTypeDefs").StaticCanvasEvents>;
         };
         'erasing:end': {
-            path: FabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
+            path: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents>;
         };
         'pmwMl:moved': {};
         'pmwMr:moved': {};

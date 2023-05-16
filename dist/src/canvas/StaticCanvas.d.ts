@@ -72,7 +72,7 @@ declare const StaticCanvas_base: {
         findNewUpperIndex(object: FabricObject, idx: number, intersecting?: boolean | undefined): number;
         collectObjects({ left, top, width, height }: import("../typedefs").TBBox, { includeIntersecting }?: {
             includeIntersecting?: boolean | undefined;
-        }): import("../shapes/Object/InteractiveObject").InteractiveFabricObject<Partial<import("../shapes/Object/types").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, import("../EventTypeDefs").ObjectEvents>[];
+        }): import("../shapes/Object/InteractiveObject").InteractiveFabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, import("../EventTypeDefs").ObjectEvents>[];
     };
 } & {
     new (): CommonMethods<CanvasEvents>;

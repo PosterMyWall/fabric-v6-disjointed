@@ -130,7 +130,7 @@ export declare function createCollectionMixin<TBase extends Constructor>(Base: T
          */
         collectObjects({ left, top, width, height }: TBBox, { includeIntersecting }?: {
             includeIntersecting?: boolean | undefined;
-        }): InteractiveFabricObject<Partial<import("./shapes/Object/types").FabricObjectProps>, import("./shapes/Object/types").SerializedObjectProps, import("./EventTypeDefs").ObjectEvents>[];
+        }): InteractiveFabricObject<Partial<import("..").FabricObjectProps>, import("./shapes/Object/types").SerializedObjectProps, import("./EventTypeDefs").ObjectEvents>[];
     };
 } & TBase;
 //# sourceMappingURL=Collection.d.ts.map
