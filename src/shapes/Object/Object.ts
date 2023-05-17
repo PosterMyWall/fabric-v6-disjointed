@@ -1355,6 +1355,7 @@ export class FabricObject<
    * If you need to get a real Jpeg or Png from an object, using toDataURL is the right way to do it.
    * toCanvasElement and then toBlob from the obtained canvas is also a good option.
    * @todo fix the export type, it could not be Image but the type that getClass return for 'image'.
+   * @param {Function} [callback] for clone as image, passed to toDataURL
    * @param {Object} [options] for clone as image, passed to toDataURL
    * @param {Number} [options.multiplier=1] Multiplier to scale by
    * @param {Number} [options.left] Cropping left offset. Introduced in v1.2.14
@@ -1366,7 +1367,7 @@ export class FabricObject<
    * @param {Boolean} [options.withoutShadow] Remove current object shadow. Introduced in 2.4.2
    * @return {Image} Object cloned as image.
    */
-  cloneAsImage(options: any): Image {
+  cloneAsImage(callback: Function, options: any): Image {
     const canvasEl = this.toCanvasElement(options);
     // TODO: how to import Image w/o an import cycle?
     const ImageClass = classRegistry.getClass('image');
