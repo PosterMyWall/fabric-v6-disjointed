@@ -116,6 +116,13 @@ export class Text<
   static textLayoutProperties: string[] = textLayoutProperties;
 
   /**
+   * *PMW*
+   * Property added to expand text cache canvas more than default expansion for fonts which get cut off.
+   * @type number
+   */
+  declare cacheExpansionFactor: number;
+
+  /**
    * @private
    */
   declare _reNewline: RegExp;

@@ -415,7 +415,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.5";
+var version = "6.0.0-beta5.8";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -18014,6 +18014,7 @@ const textDefaultValues = {
     baseline: 0.11 // baseline-shift factor (downwards)
   },
 
+  cacheExpansionFactor: 1,
   textBackgroundColor: '',
   stroke: null,
   shadow: null,

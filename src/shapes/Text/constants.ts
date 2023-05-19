@@ -69,6 +69,7 @@ export const textDefaultValues: Partial<TClassProperties<Text>> = {
     size: 0.6, // fontSize factor
     baseline: 0.11, // baseline-shift factor (downwards)
   },
+  cacheExpansionFactor: 1,
   textBackgroundColor: '',
   stroke: null,
   shadow: null,
