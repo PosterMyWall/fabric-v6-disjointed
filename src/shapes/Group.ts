@@ -87,6 +87,21 @@ export interface GroupOwnProps {
   layout: LayoutStrategy;
   subTargetCheck: boolean;
   interactive: boolean;
+  /**
+   * *PMW property added*
+   * Whether the object is currently selected.
+   * This is being used in GraphicItemSlideshowMediator to handle text editing.
+   * The editing mode is entered on single click when the item is selected. So we use this flag to determine if the item is selected.
+   * @type boolean
+   */
+  selected: boolean;
+
+  /**
+   * *PMW property added*
+   * Whether the PMW added selected flag should be used.
+   * @type boolean
+   */
+  useSelectedFlag: boolean;
 }
 
 export interface SerializedGroupProps
@@ -102,6 +117,8 @@ export const groupDefaultValues = {
   strokeWidth: 0,
   subTargetCheck: false,
   interactive: false,
+  selected: false,
+  useSelectedFlag: false
 };
 
 /**
