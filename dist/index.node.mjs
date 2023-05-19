@@ -473,7 +473,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.8";
+var version = "6.0.0-beta5.9";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -10699,6 +10699,20 @@ class Group extends createCollectionMixin(FabricObject) {
    * @private
    */
 
+  /**
+   * *PMW property added*
+   * Whether the object is currently selected.
+   * This is being used in GraphicItemSlideshowMediator to handle text editing.
+   * The editing mode is entered on single click when the item is selected. So we use this flag to determine if the item is selected.
+   * @type boolean
+   */
+
+  /**
+   * *PMW property added*
+   * Whether the PMW added selected flag should be used.
+   * @type boolean
+   */
+
   static getDefaults() {
     return _objectSpread2(_objectSpread2({}, super.getDefaults()), Group.ownDefaults);
   }
@@ -10716,6 +10730,8 @@ class Group extends createCollectionMixin(FabricObject) {
     let objectsRelativeToGroup = arguments.length > 2 ? arguments[2] : undefined;
     super();
     _defineProperty(this, "_activeObjects", []);
+    _defineProperty(this, "selected", false);
+    _defineProperty(this, "useSelectedFlag", false);
     _defineProperty(this, "__objectSelectionTracker", void 0);
     _defineProperty(this, "__objectSelectionDisposer", void 0);
     _defineProperty(this, "_firstLayoutDone", false);
@@ -10737,6 +10753,16 @@ class Group extends createCollectionMixin(FabricObject) {
       options,
       objectsRelativeToGroup
     });
+  }
+
+  /**
+   * *PMW function added*
+   * Called everytime a group object is deselected. The useSelectedFlag is used and only true when the group object is slideshow item. See docs of 'selected' property.
+   */
+  onDeselect() {
+    if (this.useSelectedFlag) {
+      this.selected = false;
+    }
   }
 
   /**

@@ -145,6 +145,22 @@ export class Group extends createCollectionMixin(
    */
   protected _activeObjects: FabricObject[] = [];
 
+  /**
+   * *PMW property added*
+   * Whether the object is currently selected.
+   * This is being used in GraphicItemSlideshowMediator to handle text editing.
+   * The editing mode is entered on single click when the item is selected. So we use this flag to determine if the item is selected.
+   * @type boolean
+   */
+  protected selected = false;
+
+  /**
+   * *PMW property added*
+   * Whether the PMW added selected flag should be used.
+   * @type boolean
+   */
+  protected useSelectedFlag = false;
+
   static stateProperties: string[] = [
     ...FabricObject.stateProperties,
     'layout',
@@ -195,6 +211,16 @@ export class Group extends createCollectionMixin(
       options,
       objectsRelativeToGroup,
     });
+  }
+
+  /**
+   * *PMW function added*
+   * Called everytime a group object is deselected. The useSelectedFlag is used and only true when the group object is slideshow item. See docs of 'selected' property.
+   */
+  onDeselect() {
+    if (this.useSelectedFlag) {
+      this.selected = false;
+    }
   }
 
   /**

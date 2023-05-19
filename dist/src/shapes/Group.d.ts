@@ -135,6 +135,20 @@ export declare class Group extends Group_base {
      * @private
      */
     protected _activeObjects: FabricObject[];
+    /**
+     * *PMW property added*
+     * Whether the object is currently selected.
+     * This is being used in GraphicItemSlideshowMediator to handle text editing.
+     * The editing mode is entered on single click when the item is selected. So we use this flag to determine if the item is selected.
+     * @type boolean
+     */
+    protected selected: boolean;
+    /**
+     * *PMW property added*
+     * Whether the PMW added selected flag should be used.
+     * @type boolean
+     */
+    protected useSelectedFlag: boolean;
     static stateProperties: string[];
     static ownDefaults: Record<string, any>;
     private __objectSelectionTracker;
@@ -149,6 +163,11 @@ export declare class Group extends Group_base {
      * @param {boolean} [objectsRelativeToGroup] true if objects exist in group coordinate plane
      */
     constructor(objects?: FabricObject[], options?: Partial<GroupProps>, objectsRelativeToGroup?: boolean);
+    /**
+     * *PMW function added*
+     * Called everytime a group object is deselected. The useSelectedFlag is used and only true when the group object is slideshow item. See docs of 'selected' property.
+     */
+    onDeselect(): void;
     /**
      * Checks if object can enter group and logs relevant warnings
      * @private

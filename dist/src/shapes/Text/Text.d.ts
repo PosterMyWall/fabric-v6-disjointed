@@ -54,6 +54,12 @@ export declare class Text<Props extends TProps<TextProps> = Partial<TextProps>, 
      */
     static textLayoutProperties: string[];
     /**
+     * *PMW*
+     * Property added to expand text cache canvas more than default expansion for fonts which get cut off.
+     * @type number
+     */
+    cacheExpansionFactor: number;
+    /**
      * @private
      */
     _reNewline: RegExp;
