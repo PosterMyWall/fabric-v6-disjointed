@@ -142,13 +142,13 @@ export declare class Group extends Group_base {
      * The editing mode is entered on single click when the item is selected. So we use this flag to determine if the item is selected.
      * @type boolean
      */
-    protected selected: boolean;
+    selected: boolean;
     /**
      * *PMW property added*
      * Whether the PMW added selected flag should be used.
      * @type boolean
      */
-    protected useSelectedFlag: boolean;
+    useSelectedFlag: boolean;
     static stateProperties: string[];
     static ownDefaults: Record<string, any>;
     private __objectSelectionTracker;

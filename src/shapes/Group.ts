@@ -152,14 +152,14 @@ export class Group extends createCollectionMixin(
    * The editing mode is entered on single click when the item is selected. So we use this flag to determine if the item is selected.
    * @type boolean
    */
-  protected selected = false;
+  public selected = false;
 
   /**
    * *PMW property added*
    * Whether the PMW added selected flag should be used.
    * @type boolean
    */
-  protected useSelectedFlag = false;
+  public useSelectedFlag = false;
 
   static stateProperties: string[] = [
     ...FabricObject.stateProperties,
