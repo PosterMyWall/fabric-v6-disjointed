@@ -39,6 +39,8 @@ export { Textbox } from './src/shapes/Textbox';
 export { Group } from './src/shapes/Group';
 export { ActiveSelection } from './src/shapes/ActiveSelection';
 export { Image } from './src/shapes/Image';
+export { Table } from './src/shapes/Table';
+export { CustomBorderTable } from './src/shapes/CustomBorderTable';
 export { createCollectionMixin } from './src/Collection';
 
 export type {TPointerEvent, Transform} from './src/EventTypeDefs'

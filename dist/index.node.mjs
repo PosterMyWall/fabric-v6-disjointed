@@ -473,7 +473,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.2";
+var version = "6.0.0-beta5.9.3";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -24180,6 +24180,152 @@ _defineProperty(Image, "ATTRIBUTE_NAMES", [...SHARED_ATTRIBUTES, 'x', 'y', 'widt
 classRegistry.setClass(Image);
 classRegistry.setSVGClass(Image);
 
+// @ts-nocheck
+class Table extends Group {
+  /**
+   * Number of table rows
+   * @type {Number}
+   */
+
+  /**
+   * Number of table columns
+   * @type {Number}
+   */
+
+  /**
+   * Background color 1 for alternate table background
+   * @type {String}
+   */
+
+  /**
+   * Background color 2 for alternate table background
+   * @type {String}
+   */
+
+  /**
+   * Background color for highlighted rows
+   * @type {String}
+   */
+
+  /**
+   * Array containing indices of highlighted rows
+   * @type {Array}
+   */
+
+  /**
+   * 2D array containing table data
+   * @type {Array}
+   */
+
+  /**
+   * Spacing Between rows of table
+   * @type {Number}
+   */
+
+  /**
+   * Spacing Between column of table
+   * @type {Number}
+   */
+
+  /**
+   * Property used for showing the 'edit content' button
+   * @type {boolean}
+   */
+
+  renderTableBorders(ctx) {
+    // fill later.
+  }
+
+  /**
+   * This function is responsible for rendering the background of table.
+   * It loops over all the rows in the table and draws the appropriate color rectangle for each row.
+   * If more then one consecutive rows have background of same color then it draws a one big rectangle of that color.
+   * @param {CanvasRenderingContext2D} ctx context to render on
+   */
+  renderTableCustomBackground(ctx) {
+    // fill later
+  }
+
+  /**
+   * Returns an array containing string values corresponding to rows background color.
+   * 'highlight' for selected rows
+   * 'color' for when colored background is selected by user
+   * 'alternate1' for even rows when alternate background is selected
+   * 'alternate2' for odd rows when alternate background is selected
+   * 'none' for transparent background
+   * @returns {Array}
+   */
+  getTableBackGroundData() {
+    // fill later
+    return [''];
+  }
+
+  /**
+   * Returns the height of an item in a given row with max height,
+   * this value is basically the minimum space in y-axis needed by this row in a table.
+   * @param {Number} row
+   * @returns {Number}
+   */
+  getHeightOfRow(row) {
+    // fill later
+    return 0;
+  }
+
+  /**
+   * Returns the width of an item in a given column with max width,
+   * this value is basically the minimum space in x-axis needed by this column in a table.
+   * @param {Number} column column index
+   * @returns {Number} minimum width required by this column
+   */
+  getWidthOfColumn(column) {
+    // fill later
+    return 0;
+  }
+
+  /**
+   * renders border for table columns
+   * @param {CanvasRenderingContext2D} ctx context to render on
+   */
+  drawColumnBorders(ctx) {
+    // fill later
+  }
+
+  /**
+   * renders border for table rows
+   * @param {CanvasRenderingContext2D} ctx context to render on
+   */
+  drawRowBorders(ctx) {
+    // fill later
+  }
+
+  /**
+   * Returns true if design is simple table structure('custom-table' or 'layout-1'), false otherwise
+   * @returns {boolean}
+   */
+  isTableLayout() {
+    return this.layoutType === 'layout-1' || this.layoutType === 'custom-table';
+  }
+}
+
+// @ts-nocheck
+class CustomBorderTable extends Table {
+  /**
+   * Renders vertical borders for table Style Menu Layouts
+   * @param {CanvasRenderingContext2D} ctx context to render on
+   */
+  drawColumnBorders(ctx) {
+    // fill later
+  }
+
+  /**
+   * Returns true if design is simple table structure('layout-13'), false otherwise
+   * @returns {boolean}
+   */
+  isTableLayout() {
+    return this.layoutType == 'layout-13';
+  }
+}
+
 /**
  * Rotates `point` around `origin` with `radians`
  * @deprecated use the Point.rotate
@@ -27803,5 +27949,5 @@ class Canvas extends Canvas$1 {
   }
 }
 
-export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, Ellipse, Gradient, Group, IText, Image, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, StaticCanvas, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv$1 as getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
+export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, CustomBorderTable, Ellipse, Gradient, Group, IText, Image, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, StaticCanvas, Table, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv$1 as getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
 //# sourceMappingURL=index.node.mjs.map
