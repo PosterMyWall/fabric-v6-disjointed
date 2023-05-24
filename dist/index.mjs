@@ -415,7 +415,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.3";
+var version = "6.0.0-beta5.9.4";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -24122,7 +24122,6 @@ _defineProperty(Image, "ATTRIBUTE_NAMES", [...SHARED_ATTRIBUTES, 'x', 'y', 'widt
 classRegistry.setClass(Image);
 classRegistry.setSVGClass(Image);
 
-// @ts-nocheck
 class Table extends Group {
   /**
    * Number of table rows
@@ -24174,6 +24173,12 @@ class Table extends Group {
    * @type {boolean}
    */
 
+  // Variables below are only added to be applied to child IText items
+
+  /**
+   * Draws the table/schedule border
+   * @param {CanvasRenderingContext2D} ctx context to draw on
+   */
   renderTableBorders(ctx) {
     // fill later.
   }
@@ -24181,7 +24186,7 @@ class Table extends Group {
   /**
    * This function is responsible for rendering the background of table.
    * It loops over all the rows in the table and draws the appropriate color rectangle for each row.
-   * If more then one consecutive rows have background of same color then it draws a one big rectangle of that color.
+   * If more than one consecutive rows have background of same color then it draws a one big rectangle of that color.
    * @param {CanvasRenderingContext2D} ctx context to render on
    */
   renderTableCustomBackground(ctx) {
@@ -24249,7 +24254,6 @@ class Table extends Group {
   }
 }
 
-// @ts-nocheck
 class CustomBorderTable extends Table {
   /**
    * Renders vertical borders for table Style Menu Layouts

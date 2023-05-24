@@ -53,6 +53,9 @@ export type {CornerPoints} from './src/Point';
 export type {TMat2D} from './src/typedefs';
 export type {FabricObjectProps} from './src/shapes/Object/types/FabricObjectProps';
 export type { TOriginX, TOriginY } from './src/typedefs';
+export type { TRGBColorSource } from './src/color/Color';
+export type { GroupProps } from './src/shapes/Group';
+export type { TableProps } from './src/shapes/Table';
 
 export * as util from './src/util';
 

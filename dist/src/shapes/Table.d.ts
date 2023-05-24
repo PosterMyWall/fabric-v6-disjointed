@@ -1,5 +1,22 @@
-import { Group } from './Group';
-import { IText } from './IText';
+import { Group, GroupProps } from './Group';
+import { IText } from './IText/IText';
+export interface TableOwnProps {
+    customPMWType: string;
+    rows: number;
+    columns: number;
+    layoutType: string;
+    alternateBackgroundColor1: string;
+    alternateBackgroundColor2: string;
+    highlightedRowsBackgroundColor: string;
+    highlightedRows: Array<number>;
+    tableArray: Array<Array<IText>>;
+    ySpacing: number;
+    xSpacing: number;
+    hasButton: boolean;
+    fontSize: number;
+}
+export interface TableProps extends GroupProps, TableOwnProps {
+}
 export declare class Table extends Group {
     customPMWType: string;
     /**
@@ -53,11 +70,16 @@ export declare class Table extends Group {
      * @type {boolean}
      */
     hasButton: boolean;
+    fontSize: number;
+    /**
+     * Draws the table/schedule border
+     * @param {CanvasRenderingContext2D} ctx context to draw on
+     */
     renderTableBorders(ctx: CanvasRenderingContext2D): void;
     /**
      * This function is responsible for rendering the background of table.
      * It loops over all the rows in the table and draws the appropriate color rectangle for each row.
-     * If more then one consecutive rows have background of same color then it draws a one big rectangle of that color.
+     * If more than one consecutive rows have background of same color then it draws a one big rectangle of that color.
      * @param {CanvasRenderingContext2D} ctx context to render on
      */
     renderTableCustomBackground(ctx: CanvasRenderingContext2D): void;

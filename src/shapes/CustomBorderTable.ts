@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {Table} from "./Table";
 
 export class CustomBorderTable extends Table {
