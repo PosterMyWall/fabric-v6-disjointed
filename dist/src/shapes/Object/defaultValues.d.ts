@@ -72,5 +72,7 @@ export declare const fabricObjectDefaultValues: {
     readonly inverted: false;
     readonly absolutePositioned: false;
     readonly FX_DURATION: 500;
+    readonly pmwBmBtnText: "";
+    readonly pmwBmBtnIcon: "";
 };
 //# sourceMappingURL=defaultValues.d.ts.map

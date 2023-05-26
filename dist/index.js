@@ -421,7 +421,7 @@
   }
   const cache = new Cache();
 
-  var version = "6.0.0-beta5.9.4";
+  var version = "6.0.0-beta5.9.5";
 
   // use this syntax so babel plugin see this import here
   const VERSION = version;
@@ -7110,7 +7110,9 @@
     clipPath: undefined,
     inverted: false,
     absolutePositioned: false,
-    FX_DURATION: 500
+    FX_DURATION: 500,
+    pmwBmBtnText: '',
+    pmwBmBtnIcon: ''
   };
 
   const _excluded$f = ["extraParam"];
@@ -9393,6 +9395,20 @@
 
   const interactiveDefaults = {};
   class InteractiveFabricObject extends FabricObject$1 {
+    /**
+     * *PMW* new property
+     * PosterMyWall property for the default text of the button.
+     * @type String
+     * @default
+     */
+
+    /**
+     * *PMW* new property
+     * An svg of the icon place in the pmw bottom-middle button
+     * @type String
+     * @default
+     */
+
     /**
      * Describe object's corner position in canvas element coordinates.
      * properties are depending on control keys and padding the main controls.

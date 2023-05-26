@@ -55,6 +55,8 @@ export interface FabricObjectProps extends ObjectProps, ControlProps, BorderProp
      * @default null
      */
     moveCursor: CSSStyleDeclaration['cursor'] | null;
+    pmwBmBtnText: string;
+    pmwBmBtnIcon: string;
     /**
      * Selection Background color of an object. colored layer behind the object when it is active.
      * does not mix good with globalCompositeOperation methods.

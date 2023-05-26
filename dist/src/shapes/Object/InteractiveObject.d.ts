@@ -56,6 +56,20 @@ export declare class InteractiveFabricObject<Props extends TFabricObjectProps = 
     hoverCursor: CSSStyleDeclaration['cursor'] | null;
     moveCursor: CSSStyleDeclaration['cursor'] | null;
     /**
+     * *PMW* new property
+     * PosterMyWall property for the default text of the button.
+     * @type String
+     * @default
+     */
+    pmwBmBtnText: string;
+    /**
+     * *PMW* new property
+     * An svg of the icon place in the pmw bottom-middle button
+     * @type String
+     * @default
+     */
+    pmwBmBtnIcon: string;
+    /**
      * Describe object's corner position in canvas element coordinates.
      * properties are depending on control keys and padding the main controls.
      * each property is an object with x, y and corner.
