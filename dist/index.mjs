@@ -415,7 +415,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.5";
+var version = "6.0.0-beta5.9.6";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -22201,6 +22201,11 @@ class IText extends ITextClickBehavior {
    * Duration of cursor fade in (in ms)
    * @type Number
    * @default
+   */
+
+  /**
+   * *PMW* new property
+   * Stores CellType for table item.
    */
 
   /**

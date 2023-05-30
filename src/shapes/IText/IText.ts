@@ -44,6 +44,12 @@ export const iTextDefaultValues = {
 interface UniqueITextProps {
   selectionStart: number;
   selectionEnd: number;
+
+  /**
+   * *PMW* new property
+   * Stores CellType for table item.
+   */
+  dataType: string;
 }
 
 export interface SerializedITextProps
@@ -181,6 +187,12 @@ export class IText<
   declare cursorDuration: number;
 
   declare compositionColor: string;
+
+  /**
+   * *PMW* new property
+   * Stores CellType for table item.
+   */
+  declare dataType: string;
 
   /**
    * Indicates whether internal text char widths can be cached
