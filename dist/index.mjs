@@ -415,7 +415,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.6";
+var version = "6.0.0-beta5.9.7";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -24275,6 +24275,8 @@ class Table extends Group {
   }
 }
 
+class Tabs extends Group {}
+
 class CustomBorderTable extends Table {
   /**
    * Renders vertical borders for table Style Menu Layouts
@@ -27891,5 +27893,5 @@ var filters = /*#__PURE__*/Object.freeze({
   Vintage: Vintage
 });
 
-export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, CustomBorderTable, Ellipse, Gradient, Group, IText, Image, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, StaticCanvas, Table, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
+export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, CustomBorderTable, Ellipse, Gradient, Group, IText, Image, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, StaticCanvas, Table, Tabs, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
 //# sourceMappingURL=index.mjs.map

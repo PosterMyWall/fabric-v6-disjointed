@@ -475,7 +475,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.6";
+var version = "6.0.0-beta5.9.7";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -24335,6 +24335,8 @@ class Table extends Group {
   }
 }
 
+class Tabs extends Group {}
+
 class CustomBorderTable extends Table {
   /**
    * Renders vertical borders for table Style Menu Layouts
@@ -28006,6 +28008,7 @@ exports.Shadow = Shadow;
 exports.SprayBrush = SprayBrush;
 exports.StaticCanvas = StaticCanvas;
 exports.Table = Table;
+exports.Tabs = Tabs;
 exports.Text = Text;
 exports.Textbox = Textbox;
 exports.Triangle = Triangle;

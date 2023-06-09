@@ -40,6 +40,7 @@ export { Group } from './src/shapes/Group';
 export { ActiveSelection } from './src/shapes/ActiveSelection';
 export { Image } from './src/shapes/Image';
 export { Table } from './src/shapes/Table';
+export { Tabs } from './src/shapes/Tabs';
 export { CustomBorderTable } from './src/shapes/CustomBorderTable';
 export { createCollectionMixin } from './src/Collection';
 
@@ -56,6 +57,7 @@ export type { TOriginX, TOriginY } from './src/typedefs';
 export type { TRGBColorSource } from './src/color/Color';
 export type { GroupProps } from './src/shapes/Group';
 export type { TableProps } from './src/shapes/Table';
+export type { TabsProps } from './src/shapes/Tabs';
 
 export * as util from './src/util';
 
