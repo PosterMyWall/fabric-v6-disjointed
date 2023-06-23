@@ -1341,7 +1341,7 @@ export class FabricObject<
    * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
    * @returns {Promise<FabricObject>}
    */
-  clone(callback: Function,propertiesToInclude: string[]) {
+  clone(callback: Function,propertiesToInclude: string[] = []) {
     const objectForm = this.toObject(propertiesToInclude);
     return (this.constructor as typeof FabricObject).fromObject(
       objectForm

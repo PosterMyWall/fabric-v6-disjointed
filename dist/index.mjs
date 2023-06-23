@@ -415,7 +415,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.8";
+var version = "6.0.0-beta5.9.9";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -7979,7 +7979,8 @@ let FabricObject$1 = class FabricObject extends AnimatableObject {
    * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
    * @returns {Promise<FabricObject>}
    */
-  clone(callback, propertiesToInclude) {
+  clone(callback) {
+    let propertiesToInclude = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     const objectForm = this.toObject(propertiesToInclude);
     return this.constructor.fromObject(objectForm);
   }

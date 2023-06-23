@@ -486,7 +486,7 @@ export declare class FabricObject<Props extends TProps<ObjectProps> = Partial<Ob
      * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
      * @returns {Promise<FabricObject>}
      */
-    clone(callback: Function, propertiesToInclude: string[]): this;
+    clone(callback: Function, propertiesToInclude?: string[]): this;
     /**
      * Creates an instance of Image out of an object
      * makes use of toCanvasElement.
