@@ -1,15 +1,15 @@
-import { getDocument, getEnv } from '../env';
-import { config } from '../config';
-import { iMatrix, VERSION } from '../constants';
-import type { CanvasEvents, StaticCanvasEvents } from '../EventTypeDefs';
-import type { Gradient } from '../gradient/Gradient';
-import { createCollectionMixin } from '../Collection';
-import { CommonMethods } from '../CommonMethods';
-import type { Pattern } from '../Pattern';
-import { Point } from '../Point';
-import type { BaseFabricObject as FabricObject } from '../EventTypeDefs';
-import type { TCachedFabricObject } from '../shapes/Object/Object';
-import type { Rect } from '../shapes/Rect';
+import {getDocument, getEnv} from '../env';
+import {config} from '../config';
+import {iMatrix, VERSION} from '../constants';
+import type {CanvasEvents, StaticCanvasEvents} from '../EventTypeDefs';
+import type {Gradient} from '../gradient/Gradient';
+import {createCollectionMixin} from '../Collection';
+import {CommonMethods} from '../CommonMethods';
+import type {Pattern} from '../Pattern';
+import {Point} from '../Point';
+import type {BaseFabricObject as FabricObject} from '../EventTypeDefs';
+import type {TCachedFabricObject} from '../shapes/Object/Object';
+import type {Rect} from '../shapes/Rect';
 import {
   Constructor,
   ImageFormat,
@@ -26,35 +26,34 @@ import {
   cancelAnimFrame,
   requestAnimFrame,
 } from '../util/animation/AnimationFrameProvider';
-import { getElementOffset } from '../util/dom_misc';
-import { uid } from '../util/internals/uid';
-import { createCanvasElement, isHTMLCanvas, toDataURL } from '../util/misc/dom';
-import { invertTransform, transformPoint } from '../util/misc/matrix';
+import {getElementOffset} from '../util/dom_misc';
+import {uid} from '../util/internals/uid';
+import {createCanvasElement, isHTMLCanvas, toDataURL} from '../util/misc/dom';
+import {invertTransform, transformPoint} from '../util/misc/matrix';
 import {
   enlivenObjectEnlivables,
   EnlivenObjectOptions,
   enlivenObjects,
 } from '../util/misc/objectEnlive';
-import { pick } from '../util/misc/pick';
-import { matrixToSVG } from '../util/misc/svgParsing';
-import { toFixed } from '../util/misc/toFixed';
-import { isCollection, isFiller, isPattern, isTextObject } from '../util/types';
+import {pick} from '../util/misc/pick';
+import {matrixToSVG} from '../util/misc/svgParsing';
+import {toFixed} from '../util/misc/toFixed';
+import {isCollection, isFiller, isPattern, isTextObject} from '../util/types';
+import {Image} from "../shapes/Image";
 
 type TDestroyed<T, K extends keyof any> = {
   // @ts-expect-error TS doesn't recognize protected/private fields using the `keyof` directive so we use `keyof any`
   [R in K | keyof T]: R extends K ? T[R] | undefined | null : T[R];
 };
 
-export type TDestroyedCanvas<T extends StaticCanvas> = TDestroyed<
-  T,
+export type TDestroyedCanvas<T extends StaticCanvas> = TDestroyed<T,
   | 'contextTop'
   | 'pixelFindContext'
   | 'lowerCanvasEl'
   | 'upperCanvasEl'
   | 'pixelFindCanvasEl'
   | 'wrapperEl'
-  | '_activeSelection'
->;
+  | '_activeSelection'>;
 
 const CANVAS_INIT_ERROR = 'Could not initialize `canvas` element';
 
@@ -110,9 +109,7 @@ export const StaticCanvasDefaults = {
  * @fires object:removed
  */
 // TODO: fix `EventSpec` inheritance https://github.com/microsoft/TypeScript/issues/26154#issuecomment-1366616260
-export class StaticCanvas<
-  EventSpec extends StaticCanvasEvents = StaticCanvasEvents
-> extends createCollectionMixin(CommonMethods<CanvasEvents>) {
+export class StaticCanvas<EventSpec extends StaticCanvasEvents = StaticCanvasEvents> extends createCollectionMixin(CommonMethods<CanvasEvents>) {
   /**
    * Background color of canvas instance.
    * @type {(String|TFiller)}
@@ -129,6 +126,10 @@ export class StaticCanvas<
    * @default
    */
   declare backgroundImage: FabricObject | null;
+
+  public setBackgroundImage(image: Image, cb: Function, opts: Record<string, any>): void{
+    //For fabric v5
+  };
 
   /**
    * Overlay color of canvas instance.
@@ -359,21 +360,21 @@ export class StaticCanvas<
       /* _DEV_MODE_START_ */
       console.warn(
         'fabric.Canvas: trying to add an object that belongs to a different canvas.\n' +
-          'Resulting to default behavior: removing object from previous canvas and adding to new canvas'
+        'Resulting to default behavior: removing object from previous canvas and adding to new canvas'
       );
       /* _DEV_MODE_END_ */
       obj.canvas.remove(obj);
     }
     obj._set('canvas', this);
     obj.setCoords();
-    this.fire('object:added', { target: obj });
-    obj.fire('added', { target: this });
+    this.fire('object:added', {target: obj});
+    obj.fire('added', {target: this});
   }
 
   _onObjectRemoved(obj: FabricObject) {
     obj._set('canvas', undefined);
-    this.fire('object:removed', { target: obj });
-    obj.fire('removed', { target: this });
+    this.fire('object:removed', {target: obj});
+    obj.fire('removed', {target: this});
   }
 
   _onStackOrderChanged() {
@@ -482,7 +483,7 @@ export class StaticCanvas<
    * @deprecated will be removed in 7.0
    */
   setWidth(value: number, options: TCanvasSizeOptions) {
-    return this.setDimensions({ width: value }, options);
+    return this.setDimensions({width: value}, options);
   }
 
   /**
@@ -494,7 +495,7 @@ export class StaticCanvas<
    * @deprecated will be removed in 7.0
    */
   setHeight(value: number, options: TCanvasSizeOptions) {
-    return this.setDimensions({ height: value }, options);
+    return this.setDimensions({height: value}, options);
   }
 
   /**
@@ -503,7 +504,7 @@ export class StaticCanvas<
    */
   protected _setDimensionsImpl(
     dimensions: Partial<TSize>,
-    { cssOnly = false, backstoreOnly = false }: TCanvasSizeOptions = {}
+    {cssOnly = false, backstoreOnly = false}: TCanvasSizeOptions = {}
   ) {
     Object.entries(dimensions).forEach(([prop, value]) => {
       let cssValue = `${value}`;
@@ -534,7 +535,7 @@ export class StaticCanvas<
    */
   setDimensions(
     dimensions: Partial<TSize>,
-    { cssOnly = false, backstoreOnly = false }: TCanvasSizeOptions = {}
+    {cssOnly = false, backstoreOnly = false}: TCanvasSizeOptions = {}
   ) {
     this._setDimensionsImpl(dimensions, {
       cssOnly,
@@ -737,8 +738,8 @@ export class StaticCanvas<
     const width = this.width,
       height = this.height,
       iVpt = invertTransform(this.viewportTransform),
-      a = transformPoint({ x: 0, y: 0 }, iVpt),
-      b = transformPoint({ x: width, y: height }, iVpt),
+      a = transformPoint({x: 0, y: 0}, iVpt),
+      b = transformPoint({x: width, y: height}, iVpt),
       // we don't support vpt flipping
       // but the code is robust enough to mostly work with flipping
       min = a.min(b),
@@ -779,7 +780,7 @@ export class StaticCanvas<
     ctx.imageSmoothingEnabled = this.imageSmoothingEnabled;
     // @ts-ignore node-canvas stuff
     ctx.patternQuality = 'best';
-    this.fire('before:render', { ctx });
+    this.fire('before:render', {ctx});
     this._renderBackground(ctx);
 
     ctx.save();
@@ -795,14 +796,14 @@ export class StaticCanvas<
       // needed to setup a couple of variables
       path.shouldCache();
       path._transformDone = true;
-      path.renderCache({ forClipping: true });
+      path.renderCache({forClipping: true});
       this.drawClipPathOnCanvas(ctx, path as TCachedFabricObject);
     }
     this._renderOverlay(ctx);
     if (this.controlsAboveOverlay) {
       this.drawControls(ctx);
     }
-    this.fire('after:render', { ctx });
+    this.fire('after:render', {ctx});
 
     if (this.__cleanupTask) {
       this.__cleanupTask();
@@ -1078,7 +1079,7 @@ export class StaticCanvas<
           this._toObject(instance, methodName, propertiesToInclude)
         ),
       ...this.__serializeBgOverlay(methodName, propertiesToInclude),
-      ...(clipPathData ? { clipPath: clipPathData } : null),
+      ...(clipPathData ? {clipPath: clipPathData} : null),
     };
   }
 
@@ -1456,6 +1457,7 @@ export class StaticCanvas<
       );
     }
   }
+
   /* _TO_SVG_END_ */
 
   /**
@@ -1486,7 +1488,7 @@ export class StaticCanvas<
   loadFromJSON(
     json: string | Record<string, any>,
     reviver?: EnlivenObjectOptions['reviver'],
-    { signal }: TCanvasHydrationOption = {}
+    {signal}: TCanvasHydrationOption = {}
   ): Promise<this> {
     if (!json) {
       return Promise.reject(new Error('fabric.js: `json` is undefined'));
@@ -1518,7 +1520,7 @@ export class StaticCanvas<
           overlayColor: overlay,
           clipPath,
         },
-        { signal }
+        {signal}
       ),
     ]).then(([enlived, enlivedMap]) => {
       this.clear();
@@ -1622,7 +1624,7 @@ export class StaticCanvas<
    */
   toCanvasElement(
     multiplier = 1,
-    { width, height, left, top, filter } = {} as TToCanvasElementOptions
+    {width, height, left, top, filter} = {} as TToCanvasElementOptions
   ): HTMLCanvasElement {
     const scaledWidth = (width || this.width) * multiplier,
       scaledHeight = (height || this.height) * multiplier,

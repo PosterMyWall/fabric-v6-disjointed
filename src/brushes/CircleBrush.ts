@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Color } from '../color/Color';
 import { Point } from '../Point';
 import { Shadow } from '../Shadow';

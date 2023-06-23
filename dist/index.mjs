@@ -415,7 +415,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.7";
+var version = "6.0.0-beta5.9.8";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -2848,153 +2848,9 @@ class StaticCanvas extends createCollectionMixin(CommonMethods) {
    * @default
    */
 
-  /**
-   * Overlay color of canvas instance.
-   * @since 1.3.9
-   * @type {(String|TFiller)}
-   * @default
-   */
-
-  /**
-   * Overlay image of canvas instance.
-   * since 2.4.0 image caching is active, please when putting an image as overlay, add to the
-   * canvas property a reference to the canvas it is on. Otherwise the image cannot detect the zoom
-   * vale. As an alternative you can disable image objectCaching
-   * @type FabricObject
-   * @default
-   */
-
-  /**
-   * Indicates whether toObject/toDatalessObject should include default values
-   * if set to false, takes precedence over the object value.
-   * @type Boolean
-   * @default
-   */
-
-  /**
-   * Indicates whether {@link add}, {@link insertAt} and {@link remove},
-   * {@link moveTo}, {@link clear} and many more, should also re-render canvas.
-   * Disabling this option will not give a performance boost when adding/removing a lot of objects to/from canvas at once
-   * since the renders are queued and executed one per frame.
-   * Disabling is suggested anyway and managing the renders of the app manually is not a big effort ( canvas.requestRenderAll() )
-   * Left default to true to do not break documentation and old app, fiddles.
-   * @type Boolean
-   * @default
-   */
-
-  /**
-   * Indicates whether object controls (borders/controls) are rendered above overlay image
-   * @type Boolean
-   * @default
-   */
-
-  /**
-   * Indicates whether the browser can be scrolled when using a touchscreen and dragging on the canvas
-   * @type Boolean
-   * @default
-   */
-
-  /**
-   * Indicates whether this canvas will use image smoothing, this is on by default in browsers
-   * @type Boolean
-   * @default
-   */
-
-  /**
-   * The transformation (a Canvas 2D API transform matrix) which focuses the viewport
-   * @type Array
-   * @example <caption>Default transform</caption>
-   * canvas.viewportTransform = [1, 0, 0, 1, 0, 0];
-   * @example <caption>Scale by 70% and translate toward bottom-right by 50, without skewing</caption>
-   * canvas.viewportTransform = [0.7, 0, 0, 0.7, 50, 50];
-   * @default
-   */
-
-  /**
-   * if set to false background image is not affected by viewport transform
-   * @since 1.6.3
-   * @type Boolean
-   * @todo we should really find a different way to do this
-   * @default
-   */
-
-  /**
-   * if set to false overlya image is not affected by viewport transform
-   * @since 1.6.3
-   * @type Boolean
-   * @todo we should really find a different way to do this
-   * @default
-   */
-
-  /**
-   * When true, canvas is scaled by devicePixelRatio for better rendering on retina screens
-   * @type Boolean
-   * @default
-   */
-
-  /**
-   * Describe canvas element extension over design
-   * properties are tl,tr,bl,br.
-   * if canvas is not zoomed/panned those points are the four corner of canvas
-   * if canvas is viewportTransformed you those points indicate the extension
-   * of canvas element in plain untrasformed coordinates
-   * The coordinates get updated with @method calcViewportBoundaries.
-   */
-
-  /**
-   * Based on vptCoords and object.aCoords, skip rendering of objects that
-   * are not included in current viewport.
-   * May greatly help in applications with crowded canvas and use of zoom/pan
-   * If One of the corner of the bounding box of the object is on the canvas
-   * the objects get rendered.
-   * @type Boolean
-   * @default
-   */
-
-  /**
-   * a fabricObject that, without stroke define a clipping area with their shape. filled in black
-   * the clipPath object gets used when the canvas has rendered, and the context is placed in the
-   * top left corner of the canvas.
-   * clipPath will clip away controls, if you do not want this to happen use controlsAboveOverlay = true
-   * @type FabricObject
-   */
-
-  /**
-   * A reference to the canvas actual HTMLCanvasElement.
-   * Can be use to read the raw pixels, but never write or manipulate
-   * @type HTMLCanvasElement
-   */
-
-  /**
-   * Width in virtual/logical pixels of the canvas.
-   * The canvas can be larger than width if retina scaling is active
-   * @type number
-   */
-
-  /**
-   * Height in virtual/logical pixels of the canvas.
-   * The canvas can be taller than width if retina scaling is active
-   * @type height
-   */
-
-  /**
-   * If true the Canvas is in the process or has been disposed/destroyed.
-   * No more rendering operation will be executed on this canvas.
-   * @type boolean
-   */
-
-  /**
-   * Started the process of disposing but not done yet.
-   * WIll likely complete the render cycle already scheduled but stopping adding more.
-   * @type boolean
-   */
-
-  /**
-   * Keeps a copy of the canvas style before setting retina scaling and other potions
-   * in order to return it to original state on dispose
-   * @type string
-   */
-
+  setBackgroundImage(image, cb, opts) {
+    //For fabric v5
+  }
   static getDefaults() {
     return StaticCanvas.ownDefaults;
   }
@@ -3994,6 +3850,7 @@ class StaticCanvas extends createCollectionMixin(CommonMethods) {
       markup.push('<rect x="0" y="0" width="100%" height="100%" ', 'fill="', filler, '"', '></rect>\n');
     }
   }
+
   /* _TO_SVG_END_ */
 
   /**
@@ -8118,10 +7975,11 @@ let FabricObject$1 = class FabricObject extends AnimatableObject {
 
   /**
    * Clones an instance.
+   * @param {Function} callback Callback is invoked with a clone as a first argument
    * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
    * @returns {Promise<FabricObject>}
    */
-  clone(propertiesToInclude) {
+  clone(callback, propertiesToInclude) {
     const objectForm = this.toObject(propertiesToInclude);
     return this.constructor.fromObject(objectForm);
   }
@@ -23510,9 +23368,6 @@ const findScaleToFit = (source, destination) => Math.min(destination.width / sou
 const findScaleToCover = (source, destination) => Math.max(destination.width / source.width, destination.height / source.height);
 
 const _excluded$5 = ["filters", "resizeFilter", "src", "crossOrigin"];
-
-// @todo Would be nice to have filtering code not imported directly.
-
 const imageDefaultValues = {
   strokeWidth: 0,
   srcFromAttribute: false,
@@ -23521,7 +23376,7 @@ const imageDefaultValues = {
   cropY: 0,
   imageSmoothing: true
 };
-const IMAGE_PROPS = ['cropX', 'cropY'];
+const IMAGE_PROPS = ["cropX", "cropY"];
 
 /**
  * @tutorial {@link http://fabricjs.com/fabric-intro-part-1#images}
@@ -23564,6 +23419,7 @@ class Image extends FabricObject {
   static getDefaults() {
     return _objectSpread2(_objectSpread2({}, super.getDefaults()), Image.ownDefaults);
   }
+
   /**
    * Constructor
    * Image can be initialized with any canvas drawable or a string.
@@ -23584,7 +23440,7 @@ class Image extends FabricObject {
     _defineProperty(this, "_filterScalingX", 1);
     _defineProperty(this, "_filterScalingY", 1);
     this.cacheKey = "texture".concat(uid());
-    this.setElement(typeof arg0 === 'string' ? getDocument().getElementById(arg0) : arg0, options);
+    this.setElement(typeof arg0 === "string" ? getDocument().getElementById(arg0) : arg0, options);
   }
 
   /**
@@ -23639,7 +23495,7 @@ class Image extends FabricObject {
     this.removeTexture(this.cacheKey);
     this.removeTexture("".concat(this.cacheKey, "_filtered"));
     this._cacheContext = null;
-    ['_originalElement', '_element', '_filteredEl', '_cacheCanvas'].forEach(elementKey => {
+    ["_originalElement", "_element", "_filteredEl", "_cacheCanvas"].forEach(elementKey => {
       getEnv().dispose(this[elementKey]);
       // @ts-expect-error disposing
       this[elementKey] = undefined;
@@ -23729,31 +23585,31 @@ class Image extends FabricObject {
       y = -this.height / 2;
     let svgString = [],
       strokeSvg,
-      clipPath = '',
-      imageRendering = '';
+      clipPath = "",
+      imageRendering = "";
     if (!element) {
       return [];
     }
     if (this.hasCrop()) {
       const clipPathId = uid();
-      svgString.push('<clipPath id="imageCrop_' + clipPathId + '">\n', '\t<rect x="' + x + '" y="' + y + '" width="' + this.width + '" height="' + this.height + '" />\n', '</clipPath>\n');
-      clipPath = ' clip-path="url(#imageCrop_' + clipPathId + ')" ';
+      svgString.push("<clipPath id=\"imageCrop_" + clipPathId + "\">\n", "\t<rect x=\"" + x + "\" y=\"" + y + "\" width=\"" + this.width + "\" height=\"" + this.height + "\" />\n", "</clipPath>\n");
+      clipPath = " clip-path=\"url(#imageCrop_" + clipPathId + ")\" ";
     }
     if (!this.imageSmoothing) {
-      imageRendering = '" image-rendering="optimizeSpeed';
+      imageRendering = "\" image-rendering=\"optimizeSpeed";
     }
-    imageMarkup.push('\t<image ', 'COMMON_PARTS', 'xlink:href="', this.getSvgSrc(true), '" x="', x - this.cropX, '" y="', y - this.cropY,
+    imageMarkup.push("\t<image ", "COMMON_PARTS", "xlink:href=\"", this.getSvgSrc(true), "\" x=\"", x - this.cropX, "\" y=\"", y - this.cropY,
     // we're essentially moving origin of transformation from top/left corner to the center of the shape
     // by wrapping it in container <g> element with actual transformation, then offsetting object to the top/left
     // so that object's center aligns with container's left/top
-    '" width="', element.width || element.naturalWidth, '" height="', element.height || element.naturalHeight, imageRendering, '"', clipPath, '></image>\n');
+    "\" width=\"", element.width || element.naturalWidth, "\" height=\"", element.height || element.naturalHeight, imageRendering, "\"", clipPath, "></image>\n");
     if (this.stroke || this.strokeDashArray) {
       const origFill = this.fill;
       this.fill = null;
-      strokeSvg = ['\t<rect ', 'x="', x, '" y="', y, '" width="', this.width, '" height="', this.height, '" style="', this.getSvgStyles(), '"/>\n'];
+      strokeSvg = ["\t<rect ", "x=\"", x, "\" y=\"", y, "\" width=\"", this.width, "\" height=\"", this.height, "\" style=\"", this.getSvgStyles(), "\"/>\n"];
       this.fill = origFill;
     }
-    if (this.paintFirst !== 'fill') {
+    if (this.paintFirst !== "fill") {
       svgString = svgString.concat(strokeSvg, imageMarkup);
     } else {
       svgString = svgString.concat(imageMarkup, strokeSvg);
@@ -23773,12 +23629,12 @@ class Image extends FabricObject {
         return element.toDataURL();
       }
       if (this.srcFromAttribute) {
-        return element.getAttribute('src');
+        return element.getAttribute("src");
       } else {
         return element.src;
       }
     } else {
-      return this.src || '';
+      return this.src || "";
     }
   }
 
@@ -23806,7 +23662,7 @@ class Image extends FabricObject {
       crossOrigin,
       signal
     }).then(img => {
-      typeof crossOrigin !== 'undefined' && this.set({
+      typeof crossOrigin !== "undefined" && this.set({
         crossOrigin
       });
       this.setElement(img);
@@ -23828,7 +23684,7 @@ class Image extends FabricObject {
       scaleY = objectScale.y,
       elementToFilter = this._filteredEl || this._originalElement;
     if (this.group) {
-      this.set('dirty', true);
+      this.set("dirty", true);
     }
     if (!filter || scaleX > minimumScale && scaleY > minimumScale) {
       this._element = elementToFilter;
@@ -23860,7 +23716,7 @@ class Image extends FabricObject {
   applyFilters() {
     let filters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.filters || [];
     filters = filters.filter(filter => filter && !filter.isNeutralState());
-    this.set('dirty', true);
+    this.set("dirty", true);
 
     // needs to clear out or WEBGL will not resize correctly
     this.removeTexture("".concat(this.cacheKey, "_filtered"));
@@ -23885,7 +23741,7 @@ class Image extends FabricObject {
       // clear the existing element to get new filter data
       // also dereference the eventual resized _element
       this._element = this._filteredEl;
-      this._filteredEl.getContext('2d').clearRect(0, 0, sourceWidth, sourceHeight);
+      this._filteredEl.getContext("2d").clearRect(0, 0, sourceWidth, sourceHeight);
       // we also need to resize again at next renderAll, so remove saved _lastScaleX/Y
       this._lastScaleX = 1;
       this._lastScaleY = 1;
@@ -23998,7 +23854,7 @@ class Image extends FabricObject {
    * @private
    */
   parsePreserveAspectRatioAttribute() {
-    const pAR = parsePreserveAspectRatioAttribute(this.preserveAspectRatio || ''),
+    const pAR = parsePreserveAspectRatioAttribute(this.preserveAspectRatio || ""),
       pWidth = this.width,
       pHeight = this.height,
       parsedAttributes = {
@@ -24014,38 +23870,38 @@ class Image extends FabricObject {
       cropX = 0,
       cropY = 0,
       offset;
-    if (pAR && (pAR.alignX !== 'none' || pAR.alignY !== 'none')) {
-      if (pAR.meetOrSlice === 'meet') {
+    if (pAR && (pAR.alignX !== "none" || pAR.alignY !== "none")) {
+      if (pAR.meetOrSlice === "meet") {
         scaleX = scaleY = findScaleToFit(this._element, parsedAttributes);
         offset = (pWidth - rWidth * scaleX) / 2;
-        if (pAR.alignX === 'Min') {
+        if (pAR.alignX === "Min") {
           offsetLeft = -offset;
         }
-        if (pAR.alignX === 'Max') {
+        if (pAR.alignX === "Max") {
           offsetLeft = offset;
         }
         offset = (pHeight - rHeight * scaleY) / 2;
-        if (pAR.alignY === 'Min') {
+        if (pAR.alignY === "Min") {
           offsetTop = -offset;
         }
-        if (pAR.alignY === 'Max') {
+        if (pAR.alignY === "Max") {
           offsetTop = offset;
         }
       }
-      if (pAR.meetOrSlice === 'slice') {
+      if (pAR.meetOrSlice === "slice") {
         scaleX = scaleY = findScaleToCover(this._element, parsedAttributes);
         offset = rWidth - pWidth / scaleX;
-        if (pAR.alignX === 'Mid') {
+        if (pAR.alignX === "Mid") {
           cropX = offset / 2;
         }
-        if (pAR.alignX === 'Max') {
+        if (pAR.alignX === "Max") {
           cropX = offset;
         }
         offset = rHeight - pHeight / scaleY;
-        if (pAR.alignY === 'Mid') {
+        if (pAR.alignY === "Mid") {
           cropY = offset / 2;
         }
-        if (pAR.alignY === 'Max') {
+        if (pAR.alignY === "Max") {
           cropY = offset;
         }
         rWidth = pWidth / scaleX;
@@ -24128,18 +23984,34 @@ class Image extends FabricObject {
   static fromElement(element, callback) {
     let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
     const parsedAttributes = parseAttributes(element, this.ATTRIBUTE_NAMES);
-    this.fromURL(parsedAttributes['xlink:href'], _objectSpread2(_objectSpread2({}, options), parsedAttributes)).then(callback);
+    this.fromURL(parsedAttributes["xlink:href"], _objectSpread2(_objectSpread2({}, options), parsedAttributes)).then(callback);
   }
 }
 _defineProperty(Image, "cacheProperties", [...cacheProperties, ...IMAGE_PROPS]);
 _defineProperty(Image, "ownDefaults", imageDefaultValues);
-_defineProperty(Image, "CSS_CANVAS", 'canvas-img');
+_defineProperty(Image, "CSS_CANVAS", "canvas-img");
 /**
  * List of attribute names to account for when parsing SVG element (used by {@link Image.fromElement})
  * @static
  * @see {@link http://www.w3.org/TR/SVG/struct.html#ImageElement}
  */
-_defineProperty(Image, "ATTRIBUTE_NAMES", [...SHARED_ATTRIBUTES, 'x', 'y', 'width', 'height', 'preserveAspectRatio', 'xlink:href', 'crossOrigin', 'image-rendering']);
+_defineProperty(Image, "ATTRIBUTE_NAMES", [...SHARED_ATTRIBUTES, "x", "y", "width", "height", "preserveAspectRatio", "xlink:href", "crossOrigin", "image-rendering"]);
+_defineProperty(Image, "filters", {
+  Grayscale: Filters.Grayscale,
+  Sepia: Filters.Sepia,
+  Invert: Filters.Invert,
+  Blur: Filters.Blur,
+  Pixelate: Filters.Pixelate,
+  Contrast: Filters.Contrast,
+  Vibrance: Filters.Vibrance,
+  Saturation: Filters.Saturation,
+  Gamma: Filters.Gamma,
+  BlendColor: Filters.BlendColor,
+  RemoveColor: Filters.RemoveColor,
+  Brightness: Filters.Brightness,
+  GradientTransparency: Filters.GradientTransparency,
+  BlendImage: Filters.BlendImage
+});
 classRegistry.setClass(Image);
 classRegistry.setSVGClass(Image);
 
@@ -26116,7 +25988,7 @@ classRegistry.setClass(Blur);
 
 const fragmentSource$a = "\n  precision highp float;\n  uniform sampler2D uTexture;\n  uniform float uBrightness;\n  varying vec2 vTexCoord;\n  void main() {\n    vec4 color = texture2D(uTexture, vTexCoord);\n    color.rgb += uBrightness;\n    gl_FragColor = color;\n  }\n";
 
-const brightnessDefaultValues = {
+const brightnessDefaultValues$1 = {
   brightness: 0,
   mainParameter: 'brightness'
 };
@@ -26188,7 +26060,7 @@ class Brightness extends BaseFilter {
     gl.uniform1f(uniformLocations.uBrightness, this.brightness);
   }
 }
-_defineProperty(Brightness, "defaults", brightnessDefaultValues);
+_defineProperty(Brightness, "defaults", brightnessDefaultValues$1);
 classRegistry.setClass(Brightness);
 
 const fragmentSource$9 = "\n  precision highp float;\n  uniform sampler2D uTexture;\n  varying vec2 vTexCoord;\n  uniform mat4 uColorMatrix;\n  uniform vec4 uConstants;\n  void main() {\n    vec4 color = texture2D(uTexture, vTexCoord);\n    color *= uColorMatrix;\n    color += uConstants;\n    gl_FragColor = color;\n  }";
@@ -27863,6 +27735,81 @@ class Vibrance extends BaseFilter {
 _defineProperty(Vibrance, "defaults", vibranceDefaultValues);
 classRegistry.setClass(Vibrance);
 
+const brightnessDefaultValues = {
+  threshold: 0,
+  mainParameter: 'threshold'
+};
+
+/**
+ * Brightness filter class
+ * @example
+ * const filter = new Brightness({
+ *   brightness: 0.05
+ * });
+ * object.filters.push(filter);
+ * object.applyFilters();
+ */
+class GradientTransparency extends BaseFilter {
+  /**
+   * Brightness value, from -1 to 1.
+   * translated to -255 to 255 for 2d
+   * 0.0039215686 is the part of 1 that get translated to 1 in 2d
+   * @param {Number} brightness
+   * @default
+   */
+
+  getFragmentSource() {
+    return fragmentSource$a;
+  }
+
+  /**
+   * Apply the Brightness operation to a Uint8ClampedArray representing the pixels of an image.
+   *
+   * @param {Object} options
+   * @param {ImageData} options.imageData The Uint8ClampedArray to be filtered.
+   */
+  applyTo2d(_ref) {
+    let {
+      imageData: {
+        data
+      }
+    } = _ref;
+    if (this.threshold === 0) {
+      return;
+    }
+    const brightness = Math.round(this.threshold * 255);
+    for (let i = 0; i < data.length; i += 4) {
+      data[i] = data[i] + brightness;
+      data[i + 1] = data[i + 1] + brightness;
+      data[i + 2] = data[i + 2] + brightness;
+    }
+  }
+
+  /**
+   * Return WebGL uniform locations for this filter's shader.
+   *
+   * @param {WebGLRenderingContext} gl The GL canvas context used to compile this filter's shader.
+   * @param {WebGLShaderProgram} program This filter's compiled shader program.
+   */
+  getUniformLocations(gl, program) {
+    return {
+      uBrightness: gl.getUniformLocation(program, 'uBrightness')
+    };
+  }
+
+  /**
+   * Send data from this filter to its shader program's uniforms.
+   *
+   * @param {WebGLRenderingContext} gl The GL canvas context used to compile this filter's shader.
+   * @param {Object} uniformLocations A map of string uniform names to WebGLUniformLocation objects
+   */
+  sendUniformData(gl, uniformLocations) {
+    gl.uniform1f(uniformLocations.uBrightness, this.threshold);
+  }
+}
+_defineProperty(GradientTransparency, "defaults", brightnessDefaultValues);
+classRegistry.setClass(GradientTransparency);
+
 var filters = /*#__PURE__*/Object.freeze({
   __proto__: null,
   BaseFilter: BaseFilter,
@@ -27877,6 +27824,7 @@ var filters = /*#__PURE__*/Object.freeze({
   Contrast: Contrast,
   Convolute: Convolute,
   Gamma: Gamma,
+  GradientTransparency: GradientTransparency,
   Grayscale: Grayscale,
   HueRotation: HueRotation,
   Invert: Invert,

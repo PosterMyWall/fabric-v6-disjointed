@@ -5,6 +5,7 @@ import type { BaseFabricObject as FabricObject } from '../EventTypeDefs';
 import type { TCachedFabricObject } from '../shapes/Object/Object';
 import { TCornerPoint, TDataUrlOptions, TFiller, TMat2D, TSize, TSVGReviver, TToCanvasElementOptions, TValidToObjectMethod } from '../typedefs';
 import { EnlivenObjectOptions } from '../util/misc/objectEnlive';
+import { Image } from "../shapes/Image";
 type TDestroyed<T, K extends keyof any> = {
     [R in K | keyof T]: R extends K ? T[R] | undefined | null : T[R];
 };
@@ -61,9 +62,22 @@ declare const StaticCanvas_base: {
         item(index: number): FabricObject;
         isEmpty(): boolean;
         size(): number;
+        /**
+         * Overlay image of canvas instance.
+         * since 2.4.0 image caching is active, please when putting an image as overlay, add to the
+         * canvas property a reference to the canvas it is on. Otherwise the image cannot detect the zoom
+         * vale. As an alternative you can disable image objectCaching
+         * @type FabricObject
+         * @default
+         */
         contains(object: FabricObject, deep?: boolean | undefined): boolean;
         complexity(): number;
         sendObjectToBack(object: FabricObject): boolean;
+        /**
+         * Indicates whether this canvas will use image smoothing, this is on by default in browsers
+         * @type Boolean
+         * @default
+         */
         bringObjectToFront(object: FabricObject): boolean;
         sendObjectBackwards(object: FabricObject, intersecting?: boolean | undefined): boolean;
         bringObjectForward(object: FabricObject, intersecting?: boolean | undefined): boolean;
@@ -102,6 +116,7 @@ export declare class StaticCanvas<EventSpec extends StaticCanvasEvents = StaticC
      * @default
      */
     backgroundImage: FabricObject | null;
+    setBackgroundImage(image: Image, cb: Function, opts: Record<string, any>): void;
     /**
      * Overlay color of canvas instance.
      * @since 1.3.9

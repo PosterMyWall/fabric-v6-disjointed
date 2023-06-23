@@ -1,29 +1,46 @@
 // @ts-nocheck
-import { getDocument, getEnv } from '../env';
-import type { BaseFilter } from '../filters/BaseFilter';
-import { getFilterBackend } from '../filters/FilterBackend';
-import { SHARED_ATTRIBUTES } from '../parser/attributes';
-import { parseAttributes } from '../parser/parseAttributes';
-import { TClassProperties, TSize } from '../typedefs';
-import { uid } from '../util/internals/uid';
-import { createCanvasElement } from '../util/misc/dom';
-import { findScaleToCover, findScaleToFit } from '../util/misc/findScaleTo';
+import { getDocument, getEnv } from "../env";
+import type { BaseFilter } from "../filters/BaseFilter";
+import { getFilterBackend } from "../filters/FilterBackend";
+import { SHARED_ATTRIBUTES } from "../parser/attributes";
+import { parseAttributes } from "../parser/parseAttributes";
+import { TClassProperties, TSize } from "../typedefs";
+import { uid } from "../util/internals/uid";
+import { createCanvasElement } from "../util/misc/dom";
+import { findScaleToCover, findScaleToFit } from "../util/misc/findScaleTo";
 import {
   enlivenObjectEnlivables,
   enlivenObjects,
   loadImage,
-  LoadImageOptions,
-} from '../util/misc/objectEnlive';
-import { parsePreserveAspectRatioAttribute } from '../util/misc/svgParsing';
-import { classRegistry } from '../ClassRegistry';
-import { FabricObject, cacheProperties } from './Object/FabricObject';
+  LoadImageOptions
+} from "../util/misc/objectEnlive";
+import { parsePreserveAspectRatioAttribute } from "../util/misc/svgParsing";
+import { classRegistry } from "../ClassRegistry";
+import { FabricObject, cacheProperties } from "./Object/FabricObject";
 import type {
   FabricObjectProps,
   SerializedObjectProps,
-  TProps,
-} from './Object/types';
-import type { ObjectEvents } from '../EventTypeDefs';
-import { WebGLFilterBackend } from '../filters/WebGLFilterBackend';
+  TProps
+} from "./Object/types";
+import type { ObjectEvents } from "../EventTypeDefs";
+import { WebGLFilterBackend } from "../filters/WebGLFilterBackend";
+import type * as Filters from "../filters/filters";
+
+type FilterType =
+  Filters.GradientTransparency
+  | Filters.Invert
+  | Filters.Sepia
+  | Filters.Grayscale
+  | Filters.BlendColor
+  | Filters.BlendImage
+  | Filters.Blur
+  | Filters.Brightness
+  | Filters.Contrast
+  | Filters.Gamma
+  | Filters.Pixelate
+  | Filters.RemoveColor
+  | Filters.Saturation
+  | Filters.Vibrance;
 
 // @todo Would be nice to have filtering code not imported directly.
 
@@ -39,7 +56,7 @@ interface UniqueImageProps {
   cropY: number;
   imageSmoothing: boolean;
   crossOrigin: string | null;
-  filters: BaseFilter[];
+  filters: Array<FilterType>;
   resizeFilter?: BaseFilter;
 }
 
@@ -50,7 +67,7 @@ export const imageDefaultValues: Partial<UniqueImageProps> &
   minimumScaleTrigger: 0.5,
   cropX: 0,
   cropY: 0,
-  imageSmoothing: true,
+  imageSmoothing: true
 };
 
 export interface SerializedImageProps extends SerializedObjectProps {
@@ -62,21 +79,19 @@ export interface SerializedImageProps extends SerializedObjectProps {
   cropY: number;
 }
 
-export interface ImageProps extends FabricObjectProps, UniqueImageProps {}
+export interface ImageProps extends FabricObjectProps, UniqueImageProps {
+}
 
-const IMAGE_PROPS = ['cropX', 'cropY'] as const;
+const IMAGE_PROPS = ["cropX", "cropY"] as const;
 
 /**
  * @tutorial {@link http://fabricjs.com/fabric-intro-part-1#images}
  */
-export class Image<
-    Props extends TProps<ImageProps> = Partial<ImageProps>,
-    SProps extends SerializedImageProps = SerializedImageProps,
-    EventSpec extends ObjectEvents = ObjectEvents
-  >
+export class Image<Props extends TProps<ImageProps> = Partial<ImageProps>,
+  SProps extends SerializedImageProps = SerializedImageProps,
+  EventSpec extends ObjectEvents = ObjectEvents>
   extends FabricObject<Props, SProps, EventSpec>
-  implements ImageProps
-{
+  implements ImageProps {
   /**
    * When calling {@link Image.getSrc}, return value from element src with `element.getAttribute('src')`.
    * This allows for relative urls as image src.
@@ -161,7 +176,7 @@ export class Image<
 
   protected declare src: string;
 
-  declare filters: BaseFilter[];
+  declare filters: Array<FilterType>;
   declare resizeFilter: BaseFilter;
 
   protected declare _element: ImageSource;
@@ -175,9 +190,10 @@ export class Image<
   static getDefaults() {
     return {
       ...super.getDefaults(),
-      ...Image.ownDefaults,
+      ...Image.ownDefaults
     };
   }
+
   /**
    * Constructor
    * Image can be initialized with any canvas drawable or a string.
@@ -193,7 +209,7 @@ export class Image<
     super({ filters: [], ...options });
     this.cacheKey = `texture${uid()}`;
     this.setElement(
-      typeof arg0 === 'string'
+      typeof arg0 === "string"
         ? (getDocument().getElementById(arg0) as ImageSource)
         : arg0,
       options
@@ -251,7 +267,7 @@ export class Image<
     this.removeTexture(this.cacheKey);
     this.removeTexture(`${this.cacheKey}_filtered`);
     this._cacheContext = null;
-    ['_originalElement', '_element', '_filteredEl', '_cacheCanvas'].forEach(
+    ["_originalElement", "_element", "_filteredEl", "_cacheCanvas"].forEach(
       (elementKey) => {
         getEnv().dispose(this[elementKey as keyof this] as Element);
         // @ts-expect-error disposing
@@ -278,12 +294,12 @@ export class Image<
     if (!element) {
       return {
         width: 0,
-        height: 0,
+        height: 0
       };
     }
     return {
       width: element.naturalWidth || element.width,
-      height: element.naturalHeight || element.height,
+      height: element.naturalHeight || element.height
     };
   }
 
@@ -311,10 +327,8 @@ export class Image<
    * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
    * @return {Object} Object representation of an instance
    */
-  toObject<
-    T extends Omit<Props & TClassProperties<this>, keyof SProps>,
-    K extends keyof T = never
-  >(propertiesToInclude: K[] = []): Pick<T, K> & SProps {
+  toObject<T extends Omit<Props & TClassProperties<this>, keyof SProps>,
+    K extends keyof T = never>(propertiesToInclude: K[] = []): Pick<T, K> & SProps {
     const filters: Record<string, any>[] = [];
     this.filters.forEach((filterObj) => {
       filterObj && filters.push(filterObj.toObject());
@@ -326,7 +340,7 @@ export class Image<
       filters,
       ...(this.resizeFilter
         ? { resizeFilter: this.resizeFilter.toObject() }
-        : {}),
+        : {})
     };
   }
 
@@ -355,73 +369,73 @@ export class Image<
       y = -this.height / 2;
     let svgString = [],
       strokeSvg,
-      clipPath = '',
-      imageRendering = '';
+      clipPath = "",
+      imageRendering = "";
     if (!element) {
       return [];
     }
     if (this.hasCrop()) {
       const clipPathId = uid();
       svgString.push(
-        '<clipPath id="imageCrop_' + clipPathId + '">\n',
-        '\t<rect x="' +
-          x +
-          '" y="' +
-          y +
-          '" width="' +
-          this.width +
-          '" height="' +
-          this.height +
-          '" />\n',
-        '</clipPath>\n'
+        "<clipPath id=\"imageCrop_" + clipPathId + "\">\n",
+        "\t<rect x=\"" +
+        x +
+        "\" y=\"" +
+        y +
+        "\" width=\"" +
+        this.width +
+        "\" height=\"" +
+        this.height +
+        "\" />\n",
+        "</clipPath>\n"
       );
-      clipPath = ' clip-path="url(#imageCrop_' + clipPathId + ')" ';
+      clipPath = " clip-path=\"url(#imageCrop_" + clipPathId + ")\" ";
     }
     if (!this.imageSmoothing) {
-      imageRendering = '" image-rendering="optimizeSpeed';
+      imageRendering = "\" image-rendering=\"optimizeSpeed";
     }
     imageMarkup.push(
-      '\t<image ',
-      'COMMON_PARTS',
-      'xlink:href="',
+      "\t<image ",
+      "COMMON_PARTS",
+      "xlink:href=\"",
       this.getSvgSrc(true),
-      '" x="',
+      "\" x=\"",
       x - this.cropX,
-      '" y="',
+      "\" y=\"",
       y - this.cropY,
       // we're essentially moving origin of transformation from top/left corner to the center of the shape
       // by wrapping it in container <g> element with actual transformation, then offsetting object to the top/left
       // so that object's center aligns with container's left/top
-      '" width="',
+      "\" width=\"",
       element.width || element.naturalWidth,
-      '" height="',
+      "\" height=\"",
       element.height || element.naturalHeight,
       imageRendering,
-      '"',
+      "\"",
       clipPath,
-      '></image>\n'
+      "></image>\n"
     );
 
     if (this.stroke || this.strokeDashArray) {
       const origFill = this.fill;
       this.fill = null;
       strokeSvg = [
-        '\t<rect ',
-        'x="',
+        "\t<rect ",
+        "x=\"",
         x,
-        '" y="',
+        "\" y=\"",
         y,
-        '" width="',
+        "\" width=\"",
         this.width,
-        '" height="',
+        "\" height=\"",
         this.height,
-        '" style="',
+        "\" style=\"",
         this.getSvgStyles(),
-        '"/>\n',
+        "\"/>\n"
       ];
       this.fill = origFill;
     }
-    if (this.paintFirst !== 'fill') {
+    if (this.paintFirst !== "fill") {
       svgString = svgString.concat(strokeSvg, imageMarkup);
     } else {
       svgString = svgString.concat(imageMarkup, strokeSvg);
@@ -442,12 +456,12 @@ export class Image<
       }
 
       if (this.srcFromAttribute) {
-        return element.getAttribute('src');
+        return element.getAttribute("src");
       } else {
         return element.src;
       }
     } else {
-      return this.src || '';
+      return this.src || "";
     }
   }
 
@@ -468,7 +482,7 @@ export class Image<
    */
   setSrc(src: string, { crossOrigin, signal }: LoadImageOptions = {}) {
     return loadImage(src, { crossOrigin, signal }).then((img) => {
-      typeof crossOrigin !== 'undefined' && this.set({ crossOrigin });
+      typeof crossOrigin !== "undefined" && this.set({ crossOrigin });
       this.setElement(img);
     });
   }
@@ -489,7 +503,7 @@ export class Image<
       scaleY = objectScale.y,
       elementToFilter = this._filteredEl || this._originalElement;
     if (this.group) {
-      this.set('dirty', true);
+      this.set("dirty", true);
     }
     if (!filter || (scaleX > minimumScale && scaleY > minimumScale)) {
       this._element = elementToFilter;
@@ -526,7 +540,7 @@ export class Image<
    */
   applyFilters(filters: BaseFilter[] = this.filters || []) {
     filters = filters.filter((filter) => filter && !filter.isNeutralState());
-    this.set('dirty', true);
+    this.set("dirty", true);
 
     // needs to clear out or WEBGL will not resize correctly
     this.removeTexture(`${this.cacheKey}_filtered`);
@@ -555,7 +569,7 @@ export class Image<
       // also dereference the eventual resized _element
       this._element = this._filteredEl;
       this._filteredEl
-        .getContext('2d')
+        .getContext("2d")
         .clearRect(0, 0, sourceWidth, sourceHeight);
       // we also need to resize again at next renderAll, so remove saved _lastScaleX/Y
       this._lastScaleX = 1;
@@ -641,7 +655,7 @@ export class Image<
       maxDestH = Math.min(h, elHeight / scaleY - cropY);
 
     elementToDraw &&
-      ctx.drawImage(elementToDraw, sX, sY, sW, sH, x, y, maxDestW, maxDestH);
+    ctx.drawImage(elementToDraw, sX, sY, sW, sH, x, y, maxDestW, maxDestH);
   }
 
   /**
@@ -679,7 +693,7 @@ export class Image<
    */
   parsePreserveAspectRatioAttribute() {
     const pAR = parsePreserveAspectRatioAttribute(
-        this.preserveAspectRatio || ''
+        this.preserveAspectRatio || ""
       ),
       pWidth = this.width,
       pHeight = this.height,
@@ -694,38 +708,38 @@ export class Image<
       cropY = 0,
       offset;
 
-    if (pAR && (pAR.alignX !== 'none' || pAR.alignY !== 'none')) {
-      if (pAR.meetOrSlice === 'meet') {
+    if (pAR && (pAR.alignX !== "none" || pAR.alignY !== "none")) {
+      if (pAR.meetOrSlice === "meet") {
         scaleX = scaleY = findScaleToFit(this._element, parsedAttributes);
         offset = (pWidth - rWidth * scaleX) / 2;
-        if (pAR.alignX === 'Min') {
+        if (pAR.alignX === "Min") {
           offsetLeft = -offset;
         }
-        if (pAR.alignX === 'Max') {
+        if (pAR.alignX === "Max") {
           offsetLeft = offset;
         }
         offset = (pHeight - rHeight * scaleY) / 2;
-        if (pAR.alignY === 'Min') {
+        if (pAR.alignY === "Min") {
           offsetTop = -offset;
         }
-        if (pAR.alignY === 'Max') {
+        if (pAR.alignY === "Max") {
           offsetTop = offset;
         }
       }
-      if (pAR.meetOrSlice === 'slice') {
+      if (pAR.meetOrSlice === "slice") {
         scaleX = scaleY = findScaleToCover(this._element, parsedAttributes);
         offset = rWidth - pWidth / scaleX;
-        if (pAR.alignX === 'Mid') {
+        if (pAR.alignX === "Mid") {
           cropX = offset / 2;
         }
-        if (pAR.alignX === 'Max') {
+        if (pAR.alignX === "Max") {
           cropX = offset;
         }
         offset = rHeight - pHeight / scaleY;
-        if (pAR.alignY === 'Mid') {
+        if (pAR.alignY === "Mid") {
           cropY = offset / 2;
         }
-        if (pAR.alignY === 'Max') {
+        if (pAR.alignY === "Max") {
           cropY = offset;
         }
         rWidth = pWidth / scaleX;
@@ -743,7 +757,7 @@ export class Image<
       offsetLeft,
       offsetTop,
       cropX,
-      cropY,
+      cropY
     };
   }
 
@@ -753,7 +767,7 @@ export class Image<
    * @type String
    * @default
    */
-  static CSS_CANVAS = 'canvas-img';
+  static CSS_CANVAS = "canvas-img";
 
   /**
    * List of attribute names to account for when parsing SVG element (used by {@link Image.fromElement})
@@ -762,14 +776,14 @@ export class Image<
    */
   static ATTRIBUTE_NAMES = [
     ...SHARED_ATTRIBUTES,
-    'x',
-    'y',
-    'width',
-    'height',
-    'preserveAspectRatio',
-    'xlink:href',
-    'crossOrigin',
-    'image-rendering',
+    "x",
+    "y",
+    "width",
+    "height",
+    "preserveAspectRatio",
+    "xlink:href",
+    "crossOrigin",
+    "image-rendering"
   ];
 
   /**
@@ -789,7 +803,7 @@ export class Image<
       f && enlivenObjects(f, options),
       // TODO: redundant - handled by enlivenObjectEnlivables
       rf && enlivenObjects([rf], options),
-      enlivenObjectEnlivables(object, options),
+      enlivenObjectEnlivables(object, options)
     ]).then(([el, filters = [], [resizeFilter] = [], hydratedProps = {}]) => {
       return new this(el, {
         ...object,
@@ -797,7 +811,7 @@ export class Image<
         crossOrigin,
         filters,
         resizeFilter,
-        ...hydratedProps,
+        ...hydratedProps
       });
     });
   }
@@ -830,11 +844,28 @@ export class Image<
     options: { signal?: AbortSignal } = {}
   ) {
     const parsedAttributes = parseAttributes(element, this.ATTRIBUTE_NAMES);
-    this.fromURL(parsedAttributes['xlink:href'], {
+    this.fromURL(parsedAttributes["xlink:href"], {
       ...options,
-      ...parsedAttributes,
+      ...parsedAttributes
     }).then(callback);
   }
+
+  static filters = {
+    Grayscale: Filters.Grayscale,
+    Sepia: Filters.Sepia,
+    Invert: Filters.Invert,
+    Blur: Filters.Blur,
+    Pixelate: Filters.Pixelate,
+    Contrast: Filters.Contrast,
+    Vibrance: Filters.Vibrance,
+    Saturation: Filters.Saturation,
+    Gamma: Filters.Gamma,
+    BlendColor: Filters.BlendColor,
+    RemoveColor: Filters.RemoveColor,
+    Brightness: Filters.Brightness,
+    GradientTransparency: Filters.GradientTransparency,
+    BlendImage: Filters.BlendImage
+  };
 }
 
 classRegistry.setClass(Image);

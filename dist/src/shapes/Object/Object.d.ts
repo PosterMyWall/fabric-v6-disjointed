@@ -482,10 +482,11 @@ export declare class FabricObject<Props extends TProps<ObjectProps> = Partial<Ob
     _findCenterFromElement(): Point;
     /**
      * Clones an instance.
+     * @param {Function} callback Callback is invoked with a clone as a first argument
      * @param {Array} [propertiesToInclude] Any properties that you might want to additionally include in the output
      * @returns {Promise<FabricObject>}
      */
-    clone(propertiesToInclude: string[]): this;
+    clone(callback: Function, propertiesToInclude: string[]): this;
     /**
      * Creates an instance of Image out of an object
      * makes use of toCanvasElement.

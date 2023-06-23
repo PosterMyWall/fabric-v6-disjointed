@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { LEFT_CLICK, MIDDLE_CLICK, RIGHT_CLICK } from '../constants';
 import { getDocument, getWindow } from '../env';
 import {

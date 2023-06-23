@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Point } from '../Point';
 import { Group } from '../shapes/Group';
 import { Shadow } from '../Shadow';

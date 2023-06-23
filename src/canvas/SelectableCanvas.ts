@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { getDocument, getEnv } from '../env';
 import { dragHandler } from '../controls/drag';
 import { getActionFromCorner } from '../controls/util';

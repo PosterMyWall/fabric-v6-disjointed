@@ -1,9 +1,11 @@
-import type { BaseFilter } from '../filters/BaseFilter';
-import { TClassProperties, TSize } from '../typedefs';
-import { LoadImageOptions } from '../util/misc/objectEnlive';
-import { FabricObject } from './Object/FabricObject';
-import type { FabricObjectProps, SerializedObjectProps, TProps } from './Object/types';
-import type { ObjectEvents } from '../EventTypeDefs';
+import type { BaseFilter } from "../filters/BaseFilter";
+import { TClassProperties, TSize } from "../typedefs";
+import { LoadImageOptions } from "../util/misc/objectEnlive";
+import { FabricObject } from "./Object/FabricObject";
+import type { FabricObjectProps, SerializedObjectProps, TProps } from "./Object/types";
+import type { ObjectEvents } from "../EventTypeDefs";
+import type * as Filters from "../filters/filters";
+type FilterType = Filters.GradientTransparency | Filters.Invert | Filters.Sepia | Filters.Grayscale | Filters.BlendColor | Filters.BlendImage | Filters.Blur | Filters.Brightness | Filters.Contrast | Filters.Gamma | Filters.Pixelate | Filters.RemoveColor | Filters.Saturation | Filters.Vibrance;
 export type ImageSource = HTMLImageElement | HTMLVideoElement | HTMLCanvasElement;
 interface UniqueImageProps {
     srcFromAttribute: boolean;
@@ -12,7 +14,7 @@ interface UniqueImageProps {
     cropY: number;
     imageSmoothing: boolean;
     crossOrigin: string | null;
-    filters: BaseFilter[];
+    filters: Array<FilterType>;
     resizeFilter?: BaseFilter;
 }
 export declare const imageDefaultValues: Partial<UniqueImageProps> & Partial<FabricObjectProps>;
@@ -102,7 +104,7 @@ export declare class Image<Props extends TProps<ImageProps> = Partial<ImageProps
     imageSmoothing: boolean;
     preserveAspectRatio: string;
     protected src: string;
-    filters: BaseFilter[];
+    filters: Array<FilterType>;
     resizeFilter: BaseFilter;
     protected _element: ImageSource;
     protected _originalElement: ImageSource;
@@ -286,7 +288,12 @@ export declare class Image<Props extends TProps<ImageProps> = Partial<ImageProps
      */
     static fromObject<T extends TProps<SerializedImageProps>>({ filters: f, resizeFilter: rf, src, crossOrigin, ...object }: T, options: {
         signal: AbortSignal;
-    }): Promise<Image<TProps<ImageProps>, SerializedImageProps, ObjectEvents>>;
+    }): Promise<Image<Omit<T, "crossOrigin" | "filters" | "resizeFilter" | "src"> & {
+        src: string | undefined;
+        crossOrigin: string | null | undefined;
+        filters: FabricObject<Partial<FabricObjectProps>, SerializedObjectProps, ObjectEvents>[];
+        resizeFilter: any;
+    }, SerializedImageProps, ObjectEvents>>;
     /**
      * Creates an instance of Image from an URL string
      * @static
@@ -306,6 +313,86 @@ export declare class Image<Props extends TProps<ImageProps> = Partial<ImageProps
     static fromElement(element: SVGElement, callback: (image: Image) => any, options?: {
         signal?: AbortSignal;
     }): void;
+    static filters: {
+        Grayscale: typeof Filters.Grayscale;
+        Sepia: {
+            new ({ ...options }?: Record<string, any>): {
+                readonly type: string;
+                matrix: number[];
+                colorsOnly: boolean;
+                setOptions({ matrix, ...options }: Record<string, any>): void;
+                getFragmentSource(): string;
+                applyTo2d(options: import("../filters/typedefs").T2DPipelineState): void;
+                getUniformLocations(gl: WebGLRenderingContext, program: WebGLProgram): import("../filters/typedefs").TWebGLUniformLocationMap;
+                sendUniformData(gl: WebGLRenderingContext, uniformLocations: import("../filters/typedefs").TWebGLUniformLocationMap): void;
+                vertexSource: string;
+                mainParameter?: keyof any | undefined;
+                createProgram(gl: WebGLRenderingContext, fragmentSource?: string, vertexSource?: string): {
+                    program: WebGLProgram;
+                    attributeLocations: import("../filters/typedefs").TWebGLAttributeLocationMap;
+                    uniformLocations: import("../filters/typedefs").TWebGLUniformLocationMap;
+                };
+                getAttributeLocations(gl: WebGLRenderingContext, program: WebGLProgram): import("../filters/typedefs").TWebGLAttributeLocationMap;
+                sendAttributeData(gl: WebGLRenderingContext, attributeLocations: Record<string, number>, aPositionData: Float32Array): void;
+                _setupFrameBuffer(options: import("../filters/typedefs").TWebGLPipelineState): void;
+                _swapTextures(options: import("../filters/typedefs").TWebGLPipelineState): void;
+                isNeutralState(options?: any): boolean;
+                applyTo(options: import("../filters/typedefs").TWebGLPipelineState | import("../filters/typedefs").T2DPipelineState): void;
+                getCacheKey(): string;
+                retrieveShader(options: import("../filters/typedefs").TWebGLPipelineState): import("../filters/typedefs").TWebGLProgramCacheItem;
+                applyToWebGL(options: import("../filters/typedefs").TWebGLPipelineState): void;
+                bindAdditionalTexture(gl: WebGLRenderingContext, texture: WebGLTexture, textureUnit: number): void;
+                unbindAdditionalTexture(gl: WebGLRenderingContext, textureUnit: number): void;
+                getMainParameter(): string | boolean | number[] | ((gl: WebGLRenderingContext, program: WebGLProgram) => import("../filters/typedefs").TWebGLAttributeLocationMap) | ((options: import("../filters/typedefs").TWebGLPipelineState) => import("../filters/typedefs").TWebGLProgramCacheItem) | ((options?: any) => boolean) | ((gl: WebGLRenderingContext, program: WebGLProgram) => import("../filters/typedefs").TWebGLUniformLocationMap) | (() => string) | (({ matrix, ...options }: Record<string, any>) => void) | ((options: import("../filters/typedefs").T2DPipelineState) => void) | ((gl: WebGLRenderingContext, uniformLocations: import("../filters/typedefs").TWebGLUniformLocationMap) => void) | ((gl: WebGLRenderingContext, fragmentSource?: string, vertexSource?: string) => {
+                    program: WebGLProgram;
+                    attributeLocations: import("../filters/typedefs").TWebGLAttributeLocationMap;
+                    uniformLocations: import("../filters/typedefs").TWebGLUniformLocationMap;
+                }) | ((gl: WebGLRenderingContext, attributeLocations: Record<string, number>, aPositionData: Float32Array) => void) | ((options: import("../filters/typedefs").TWebGLPipelineState) => void) | ((options: import("../filters/typedefs").TWebGLPipelineState) => void) | ((options: import("../filters/typedefs").TWebGLPipelineState | import("../filters/typedefs").T2DPipelineState) => void) | (() => string) | ((options: import("../filters/typedefs").TWebGLPipelineState) => void) | ((gl: WebGLRenderingContext, texture: WebGLTexture, textureUnit: number) => void) | ((gl: WebGLRenderingContext, textureUnit: number) => void) | (() => string | boolean | number[] | ((gl: WebGLRenderingContext, program: WebGLProgram) => import("../filters/typedefs").TWebGLAttributeLocationMap) | ((options: import("../filters/typedefs").TWebGLPipelineState) => import("../filters/typedefs").TWebGLProgramCacheItem) | ((options?: any) => boolean) | ((gl: WebGLRenderingContext, program: WebGLProgram) => import("../filters/typedefs").TWebGLUniformLocationMap) | (() => string) | (({ matrix, ...options }: Record<string, any>) => void) | ((options: import("../filters/typedefs").T2DPipelineState) => void) | ((gl: WebGLRenderingContext, uniformLocations: import("../filters/typedefs").TWebGLUniformLocationMap) => void) | ((gl: WebGLRenderingContext, fragmentSource?: string, vertexSource?: string) => {
+                    program: WebGLProgram;
+                    attributeLocations: import("../filters/typedefs").TWebGLAttributeLocationMap;
+                    uniformLocations: import("../filters/typedefs").TWebGLUniformLocationMap;
+                }) | ((gl: WebGLRenderingContext, attributeLocations: Record<string, number>, aPositionData: Float32Array) => void) | ((options: import("../filters/typedefs").TWebGLPipelineState) => void) | ((options: import("../filters/typedefs").TWebGLPipelineState) => void) | ((options: import("../filters/typedefs").TWebGLPipelineState | import("../filters/typedefs").T2DPipelineState) => void) | (() => string) | ((options: import("../filters/typedefs").TWebGLPipelineState) => void) | ((gl: WebGLRenderingContext, texture: WebGLTexture, textureUnit: number) => void) | ((gl: WebGLRenderingContext, textureUnit: number) => void) | any | (() => {
+                    type: string;
+                }) | (() => {
+                    type: string;
+                }) | ((value: any) => void) | ((options: import("../filters/typedefs").T2DPipelineState) => void) | undefined) | (() => {
+                    type: string;
+                }) | (() => {
+                    type: string;
+                }) | ((value: any) => void) | ((options: import("../filters/typedefs").T2DPipelineState) => void) | undefined;
+                setMainParameter(value: any): void;
+                createHelpLayer(options: import("../filters/typedefs").T2DPipelineState): void;
+                toObject(): {
+                    type: string;
+                };
+                toJSON(): {
+                    type: string;
+                };
+            };
+            defaults: {
+                mainParameter: undefined;
+                matrix: number[];
+                type?: string | undefined;
+                vertexSource?: string | undefined;
+                colorsOnly?: boolean | undefined;
+            };
+            fromObject({ type, ...filterOptions }: Record<string, any>, options: {
+                signal: AbortSignal;
+            }): Promise<BaseFilter>;
+        };
+        Invert: typeof Filters.Invert;
+        Blur: typeof Filters.Blur;
+        Pixelate: typeof Filters.Pixelate;
+        Contrast: typeof Filters.Contrast;
+        Vibrance: typeof Filters.Vibrance;
+        Saturation: typeof Filters.Saturation;
+        Gamma: typeof Filters.Gamma;
+        BlendColor: typeof Filters.BlendColor;
+        RemoveColor: typeof Filters.RemoveColor;
+        Brightness: typeof Filters.Brightness;
+        GradientTransparency: typeof Filters.GradientTransparency;
+        BlendImage: typeof Filters.BlendImage;
+    };
 }
 export {};
 //# sourceMappingURL=Image.d.ts.map

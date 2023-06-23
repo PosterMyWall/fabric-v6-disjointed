@@ -333,7 +333,10 @@ export declare class Canvas extends SelectableCanvas {
                 backgroundImage?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
                 overlayImage?: FabricObject<Partial<import("../..").FabricObjectProps>, import("../shapes/Object/types").SerializedObjectProps, ObjectEvents> | undefined;
             };
-        };
+        }; /**
+         * @private
+         * @param {Event} e Event object fired on mouseenter
+         */
         'text:selection:changed': {
             target: IText<import("../shapes/IText/IText").ITextProps, import("../shapes/IText/IText").SerializedITextProps, import("../shapes/IText/ITextBehavior").ITextEvents>;
         };
