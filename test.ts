@@ -7,4 +7,6 @@ export const onResizeWithLeftHandle = (e: Fabric.TPointerEvent, transformData: F
   if (!transformData.corner) {
     return false;
   }
+
+  const canvas = new Fabric.Canvas('test');
 }

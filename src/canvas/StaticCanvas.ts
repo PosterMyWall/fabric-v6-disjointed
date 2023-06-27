@@ -125,7 +125,7 @@ export class StaticCanvas<EventSpec extends StaticCanvasEvents = StaticCanvasEve
    * @type FabricObject
    * @default
    */
-  declare backgroundImage: FabricObject | null;
+  declare backgroundImage: Image | null;
 
   public setBackgroundImage(image: Image, cb: Function, opts: Record<string, any>): void{
     //For fabric v5

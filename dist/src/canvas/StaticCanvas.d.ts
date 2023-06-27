@@ -62,22 +62,9 @@ declare const StaticCanvas_base: {
         item(index: number): FabricObject;
         isEmpty(): boolean;
         size(): number;
-        /**
-         * Overlay image of canvas instance.
-         * since 2.4.0 image caching is active, please when putting an image as overlay, add to the
-         * canvas property a reference to the canvas it is on. Otherwise the image cannot detect the zoom
-         * vale. As an alternative you can disable image objectCaching
-         * @type FabricObject
-         * @default
-         */
         contains(object: FabricObject, deep?: boolean | undefined): boolean;
         complexity(): number;
         sendObjectToBack(object: FabricObject): boolean;
-        /**
-         * Indicates whether this canvas will use image smoothing, this is on by default in browsers
-         * @type Boolean
-         * @default
-         */
         bringObjectToFront(object: FabricObject): boolean;
         sendObjectBackwards(object: FabricObject, intersecting?: boolean | undefined): boolean;
         bringObjectForward(object: FabricObject, intersecting?: boolean | undefined): boolean;
@@ -115,7 +102,7 @@ export declare class StaticCanvas<EventSpec extends StaticCanvasEvents = StaticC
      * @type FabricObject
      * @default
      */
-    backgroundImage: FabricObject | null;
+    backgroundImage: Image | null;
     setBackgroundImage(image: Image, cb: Function, opts: Record<string, any>): void;
     /**
      * Overlay color of canvas instance.
