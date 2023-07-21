@@ -48,7 +48,7 @@ export type {TPointerEvent, Transform} from './src/EventTypeDefs'
 export type {GradientOptions, GradientType} from './src/gradient/typedefs';
 export type {TSvgParsedCallback} from './src/parser/typedefs';
 export type {TFiller} from './src/typedefs';
-export type {TPointerEventInfo} from './src/EventTypeDefs';
+export type {TPointerEventInfo, ModifiedEvent} from './src/EventTypeDefs';
 export type {BaseFabricObject} from './src/EventTypeDefs';
 export type {CornerPoints} from './src/Point';
 export type {TMat2D} from './src/typedefs';
