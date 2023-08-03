@@ -9,4 +9,17 @@ export const onResizeWithLeftHandle = (e: Fabric.TPointerEvent, transformData: F
   }
 
   const canvas = new Fabric.Canvas('test');
+
+  var img = new Image(1,1);
+  const imageItem = new Fabric.Image(img,{
+    frameWidth: 10,
+    frameHeight: 10,
+    frameTime: 10,
+  })
+  const spriteItem = new Fabric.Sprite(img,{
+    frameWidth: 10,
+    frameHeight: 10,
+    frameTime: 10,
+  })
+  spriteItem.play();
 }

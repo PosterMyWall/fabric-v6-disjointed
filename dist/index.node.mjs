@@ -473,7 +473,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.11";
+var version = "6.0.0-beta5.9.12";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -22988,6 +22988,28 @@ _defineProperty(Textbox, "ownDefaults", textboxDefaultValues);
 classRegistry.setClass(Textbox);
 
 /**
+ * @tutorial {@link http://fabricjs.com/fabric-intro-part-1#images}
+ */
+class Sprite extends FabricObject {
+  constructor(arg0) {
+    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    super(_objectSpread2({}, options));
+    _defineProperty(this, "type", void 0);
+  }
+  play() {
+    // TOOD
+  }
+  pause() {
+    // TOOD
+  }
+  stop() {
+    // TOOD
+  }
+}
+classRegistry.setClass(Image);
+classRegistry.setSVGClass(Image);
+
+/**
  * Canvas 2D filter backend.
  */
 
@@ -23440,7 +23462,7 @@ const IMAGE_PROPS = ["cropX", "cropY"];
 /**
  * @tutorial {@link http://fabricjs.com/fabric-intro-part-1#images}
  */
-class Image extends FabricObject {
+let Image$1 = class Image extends FabricObject {
   /**
    * When calling {@link Image.getSrc}, return value from element src with `element.getAttribute('src')`.
    * This allows for relative urls as image src.
@@ -23476,7 +23498,7 @@ class Image extends FabricObject {
    */
 
   static getDefaults() {
-    return _objectSpread2(_objectSpread2({}, super.getDefaults()), Image.ownDefaults);
+    return _objectSpread2(_objectSpread2({}, super.getDefaults()), Image$1.ownDefaults);
   }
 
   /**
@@ -23523,7 +23545,7 @@ class Image extends FabricObject {
     this._element = element;
     this._originalElement = element;
     this._setWidthHeight(size);
-    element.classList.add(Image.CSS_CANVAS);
+    element.classList.add(Image$1.CSS_CANVAS);
     if (this.filters.length !== 0) {
       this.applyFilters();
     }
@@ -24045,17 +24067,17 @@ class Image extends FabricObject {
     const parsedAttributes = parseAttributes(element, this.ATTRIBUTE_NAMES);
     this.fromURL(parsedAttributes["xlink:href"], _objectSpread2(_objectSpread2({}, options), parsedAttributes)).then(callback);
   }
-}
-_defineProperty(Image, "cacheProperties", [...cacheProperties, ...IMAGE_PROPS]);
-_defineProperty(Image, "ownDefaults", imageDefaultValues);
-_defineProperty(Image, "CSS_CANVAS", "canvas-img");
+};
+_defineProperty(Image$1, "cacheProperties", [...cacheProperties, ...IMAGE_PROPS]);
+_defineProperty(Image$1, "ownDefaults", imageDefaultValues);
+_defineProperty(Image$1, "CSS_CANVAS", "canvas-img");
 /**
  * List of attribute names to account for when parsing SVG element (used by {@link Image.fromElement})
  * @static
  * @see {@link http://www.w3.org/TR/SVG/struct.html#ImageElement}
  */
-_defineProperty(Image, "ATTRIBUTE_NAMES", [...SHARED_ATTRIBUTES, "x", "y", "width", "height", "preserveAspectRatio", "xlink:href", "crossOrigin", "image-rendering"]);
-_defineProperty(Image, "filters", {
+_defineProperty(Image$1, "ATTRIBUTE_NAMES", [...SHARED_ATTRIBUTES, "x", "y", "width", "height", "preserveAspectRatio", "xlink:href", "crossOrigin", "image-rendering"]);
+_defineProperty(Image$1, "filters", {
   Grayscale: Filters.Grayscale,
   Sepia: Filters.Sepia,
   Invert: Filters.Invert,
@@ -24071,8 +24093,8 @@ _defineProperty(Image, "filters", {
   GradientTransparency: Filters.GradientTransparency,
   BlendImage: Filters.BlendImage
 });
-classRegistry.setClass(Image);
-classRegistry.setSVGClass(Image);
+classRegistry.setClass(Image$1);
+classRegistry.setSVGClass(Image$1);
 
 class Table extends Group {
   /**
@@ -24806,7 +24828,7 @@ const ElementsParser = function (elements, callback, options, reviver, parsingOp
       let _options;
       this.resolveGradient(obj, el, 'fill');
       this.resolveGradient(obj, el, 'stroke');
-      if (obj instanceof Image && obj._originalElement) {
+      if (obj instanceof Image$1 && obj._originalElement) {
         _options = obj.parsePreserveAspectRatioAttribute(el);
       }
       removeTransformMatrixForSvgParsing(obj, _options);
@@ -25877,7 +25899,7 @@ class BlendImage extends BaseFilter {
         image
       } = _ref2,
       filterOptions = _objectWithoutProperties(_ref2, _excluded$3);
-    return Image.fromObject(image, options).then(enlivedImage => new this(_objectSpread2(_objectSpread2({}, filterOptions), {}, {
+    return Image$1.fromObject(image, options).then(enlivedImage => new this(_objectSpread2(_objectSpread2({}, filterOptions), {}, {
       image: enlivedImage
     })));
   }
@@ -27925,5 +27947,5 @@ class Canvas extends Canvas$1 {
   }
 }
 
-export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, CustomBorderTable, Ellipse, Gradient, Group, IText, Image, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, StaticCanvas, Table, Tabs, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv$1 as getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
+export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, CustomBorderTable, Ellipse, Gradient, Group, IText, Image$1 as Image, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, Sprite, StaticCanvas, Table, Tabs, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv$1 as getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
 //# sourceMappingURL=index.node.mjs.map
