@@ -473,7 +473,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.14";
+var version = "6.0.0-beta5.9.15";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -27947,5 +27947,5 @@ class Canvas extends Canvas$1 {
   }
 }
 
-export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, CustomBorderTable, Ellipse, Gradient, Group, IText, Image$1 as Image, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, Sprite, StaticCanvas, Table, Tabs, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv$1 as getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
+export { ActiveSelection, BaseBrush, Canvas, Canvas2dFilterBackend, Circle, CircleBrush, Color, Control, CustomBorderTable, Ellipse, Gradient, Group, IText, Image$1 as Image, ImageFormat, Intersection, Line, FabricObject as Object, Observable, Path, Pattern, PatternBrush, PencilBrush, Point, Polygon, Polyline, Rect, Shadow, SprayBrush, Sprite, StaticCanvas, Table, Tabs, Text, Textbox, Triangle, WebGLFilterBackend, cache, classRegistry, config, index as controlsUtils, createCollectionMixin, filters, getCSSRules, getDocument, getEnv$1 as getEnv, getFilterBackend, getWindow, iMatrix, initFilterBackend, loadSVGFromString, loadSVGFromURL, parseAttributes, parseElements, parseFontDeclaration, parsePointsAttribute, parseStyleAttribute, parseTransformAttribute, runningAnimations, setEnv, index$1 as util, VERSION as version };
 //# sourceMappingURL=index.node.mjs.map

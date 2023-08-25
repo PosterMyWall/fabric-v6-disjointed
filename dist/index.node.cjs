@@ -475,7 +475,7 @@ class Cache {
 }
 const cache = new Cache();
 
-var version = "6.0.0-beta5.9.14";
+var version = "6.0.0-beta5.9.15";
 
 // use this syntax so babel plugin see this import here
 const VERSION = version;
@@ -1551,12 +1551,12 @@ class CommonMethods extends Observable {
 }
 
 // https://www.typescriptlang.org/docs/handbook/utility-types.html
-let ImageFormat;
+exports.ImageFormat = void 0;
 (function (ImageFormat) {
   ImageFormat["jpeg"] = "jpeg";
   ImageFormat["jpg"] = "jpeg";
   ImageFormat["png"] = "png";
-})(ImageFormat || (ImageFormat = {}));
+})(exports.ImageFormat || (exports.ImageFormat = {}));
 let SVGElementName;
 (function (SVGElementName) {
   SVGElementName["linearGradient"] = "linearGradient";
@@ -4042,7 +4042,7 @@ let StaticCanvas$1 = class StaticCanvas extends createCollectionMixin(CommonMeth
   toDataURL() {
     let options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     const {
-      format = ImageFormat.png,
+      format = exports.ImageFormat.png,
       quality = 1,
       multiplier = 1,
       enableRetinaScaling = false
