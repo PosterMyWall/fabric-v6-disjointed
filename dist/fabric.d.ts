@@ -38,7 +38,7 @@ export { Table } from "./src/shapes/Table";
 export { Tabs } from "./src/shapes/Tabs";
 export { CustomBorderTable } from "./src/shapes/CustomBorderTable";
 export { createCollectionMixin } from "./src/Collection";
-export type { TDataUrlOptions } from "./src/typedefs";
+export type { TDataUrlOptions, ImageFormat } from "./src/typedefs";
 export type { TPointerEvent, Transform } from "./src/EventTypeDefs";
 export type { GradientOptions, GradientType } from "./src/gradient/typedefs";
 export type { TSvgParsedCallback } from "./src/parser/typedefs";
