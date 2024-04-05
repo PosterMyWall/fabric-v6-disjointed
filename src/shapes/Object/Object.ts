@@ -98,6 +98,7 @@ export class FabricObject<
 
   declare opacity: number;
   declare __PMWID: string;
+  declare bindedObjectPmwId: string;
 
   declare paintFirst: 'fill' | 'stroke';
   declare fill: string | TFiller | null;

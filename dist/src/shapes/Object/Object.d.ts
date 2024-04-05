@@ -44,6 +44,7 @@ export declare class FabricObject<Props extends TProps<ObjectProps> = Partial<Ob
     minScaleLimit: number;
     opacity: number;
     __PMWID: string;
+    bindedObjectPmwId: string;
     paintFirst: 'fill' | 'stroke';
     fill: string | TFiller | null;
     fillRule: CanvasFillRule;
