@@ -110,6 +110,19 @@ export class Sprite<Props extends TProps<StickerProps> = Partial<StickerProps>,
   stop() {
     // TOOD
   }
+
+  seek(time: number) {
+    // TOOD
+  }
+
+  getCurrentTime(): number {
+    // TOOD
+    return 0;
+  }
+
+  onRemove(): void{
+
+  }
 }
 
 classRegistry.setClass(Image);

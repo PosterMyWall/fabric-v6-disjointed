@@ -421,7 +421,7 @@
   }
   const cache = new Cache();
 
-  var version = "6.0.0-beta5.9.16";
+  var version = "6.0.0-beta5.9.17";
 
   // use this syntax so babel plugin see this import here
   const VERSION = version;
@@ -22953,6 +22953,14 @@
     stop() {
       // TOOD
     }
+    seek(time) {
+      // TOOD
+    }
+    getCurrentTime() {
+      // TOOD
+      return 0;
+    }
+    onRemove() {}
   }
   classRegistry.setClass(Image);
   classRegistry.setSVGClass(Image);

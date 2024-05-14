@@ -47,6 +47,9 @@ export declare class Sprite<Props extends TProps<StickerProps> = Partial<Sticker
     play(): void;
     pause(): void;
     stop(): void;
+    seek(time: number): void;
+    getCurrentTime(): number;
+    onRemove(): void;
 }
 export {};
 //# sourceMappingURL=Sprite.d.ts.map
